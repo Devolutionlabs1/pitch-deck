@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devolution Labs — Master Pitch Deck 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #0a0a0a; color: #fff; }
+  .slide { width: 1280px; min-height: 720px; margin: 0 auto 40px; padding: 72px 80px; position: relative; page-break-after: always; display: flex; flex-direction: column; justify-content: center; border: 1px solid #141414; }
+  .slide-cover { text-align: center; align-items: center; background: radial-gradient(ellipse at 50% 0%, #071522 0%, #0a0a0a 65%); }
+  .logo { font-size: 13px; letter-spacing: 5px; text-transform: uppercase; color: #22d3ee; margin-bottom: 28px; font-weight: 700; }
+  .cover-title { font-size: 72px; font-weight: 900; line-height: 1.0; margin-bottom: 20px; letter-spacing: -3px; }
+  .cover-title span { color: #22d3ee; }
+  .cover-sub { font-size: 18px; color: #444; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; }
+  .slide-number { position: absolute; bottom: 28px; right: 44px; font-size: 11px; color: #222; letter-spacing: 3px; }
+  .slide-label { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: #22d3ee; margin-bottom: 20px; font-weight: 700; }
+  h2 { font-size: 46px; font-weight: 900; line-height: 1.1; margin-bottom: 24px; letter-spacing: -1px; }
+  h2 span { color: #22d3ee; }
+  h3 { font-size: 22px; font-weight: 700; margin-bottom: 10px; color: #fff; }
+  p { font-size: 17px; line-height: 1.75; color: #777; margin-bottom: 12px; }
+  p strong { color: #ccc; }
+  .divider { width: 48px; height: 3px; background: #22d3ee; margin: 20px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; margin-top: 24px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 24px; }
+  .bullet-list { list-style: none; }
+  .bullet-list li { font-size: 16px; color: #777; padding: 9px 0 9px 22px; border-bottom: 1px solid #141414; position: relative; line-height: 1.55; }
+  .bullet-list li::before { content: '→'; position: absolute; left: 0; color: #22d3ee; font-weight: 700; }
+  .bullet-list li strong { color: #ccc; }
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  th { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #444; padding: 11px 14px; text-align: left; border-bottom: 1px solid #1a1a1a; }
+  td { font-size: 15px; color: #777; padding: 13px 14px; border-bottom: 1px solid #0f0f0f; vertical-align: middle; }
+  td:first-child { color: #ccc; font-weight: 600; }
+  td:last-child { color: #22d3ee; font-weight: 700; text-align: right; }
+  td:nth-child(2) { font-size: 13px; color: #555; }
+  .total-row td { color: #fff; font-weight: 800; font-size: 17px; border-top: 2px solid #22d3ee; border-bottom: none; padding-top: 16px; }
+  .total-row td:last-child { color: #22d3ee; font-size: 20px; }
+  .stat-row { display: flex; gap: 40px; margin-top: 32px; }
+  .stat-block .num { font-size: 52px; font-weight: 900; color: #22d3ee; line-height: 1; }
+  .stat-block .lbl { font-size: 12px; color: #444; text-transform: uppercase; letter-spacing: 2px; margin-top: 6px; }
+  .stat-block .desc { font-size: 13px; color: #555; margin-top: 6px; line-height: 1.5; }
+  .big-stat { font-size: 84px; font-weight: 900; color: #22d3ee; line-height: 1; letter-spacing: -3px; }
+  .big-stat-lbl { font-size: 18px; color: #444; text-transform: uppercase; letter-spacing: 2px; margin-top: 8px; }
+  .card { background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 10px; padding: 24px 28px; }
+  .card-cyan { border-left: 3px solid #22d3ee; }
+  .card-purple { border-left: 3px solid #8b5cf6; }
+  .card-blue { border-left: 3px solid #3b82f6; }
+  .card-green { border-left: 3px solid #10b981; }
+  .card-amber { border-left: 3px solid #f59e0b; }
+  .card h4 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .card-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; margin-bottom: 10px; }
+  .label-cyan { color: #22d3ee; }
+  .label-purple { color: #a78bfa; }
+  .label-blue { color: #60a5fa; }
+  .label-green { color: #34d399; }
+  .label-amber { color: #fbbf24; }
+  .card p { font-size: 13px; color: #555; margin: 0; line-height: 1.6; }
+  .example-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .example-industry { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #22d3ee; font-weight: 700; }
+  .example-company { font-size: 28px; font-weight: 800; }
+  .example-tagline { font-size: 15px; color: #555; }
+  .savings-pill { background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.3); color: #22d3ee; font-size: 20px; font-weight: 900; padding: 8px 20px; border-radius: 100px; display: inline-block; margin-top: 8px; }
+  /* Org Chart */
+  .org-wrap { margin-top: 24px; display: flex; flex-direction: column; align-items: center; }
+  .org-level { display: flex; justify-content: center; gap: 16px; }
+  .org-node { display: flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 10px; }
+  .org-ceo { background: #071522; border: 1.5px solid #22d3ee; box-shadow: 0 0 20px rgba(34,211,238,0.15); min-width: 260px; }
+  .org-dept { background: #0d0a1f; border: 1.5px solid #7c3aed; box-shadow: 0 0 14px rgba(124,58,237,0.15); min-width: 190px; }
+  .org-agent { background: #060e1a; border: 1px solid #1e3a5f; min-width: 155px; }
+  .node-icon { width: 32px; height: 32px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .ni-ceo { background: rgba(34,211,238,0.12); }
+  .ni-dept { background: rgba(124,58,237,0.12); }
+  .ni-agent { background: rgba(30,58,95,0.4); }
+  .nt { display: flex; flex-direction: column; gap: 1px; }
+  .nl { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; }
+  .nl-ceo { color: #22d3ee; }
+  .nl-dept { color: #a78bfa; }
+  .nl-agent { color: #3b6cb7; }
+  .nn { font-size: 14px; font-weight: 700; white-space: nowrap; }
+  .nn-ceo { color: #22d3ee; }
+  .nn-dept { color: #c4b5fd; }
+  .nn-agent { color: #7ba8d4; font-size: 13px; }
+  .vline { width: 2px; height: 24px; background: linear-gradient(to bottom, #22d3ee66, #7c3aed66); margin: 0 auto; }
+  .contact-block { margin-top: 40px; text-align: center; }
+  .contact-block a { color: #22d3ee; font-size: 20px; text-decoration: none; }
+  .contact-block p { font-size: 14px; color: #333; margin-top: 6px; }
+  .hero-num { font-size: 72px; font-weight: 900; color: #22d3ee; line-height: 1; letter-spacing: -3px; }
+  .hero-sub { font-size: 18px; color: #444; margin-top: 8px; text-transform: uppercase; letter-spacing: 2px; }
+  .section-divider { width: 100%; border-top: 1px solid #1a1a1a; margin: 20px 0; }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: COVER -->
+<div class="slide slide-cover">
+  <div class="logo">Devolution Labs</div>
+  <div class="cover-title"><span>AI Workforces</span><br>for Enterprise.</div>
+  <div class="cover-sub">Company Overview &amp; Capabilities — 2026</div>
+  <div class="slide-number">01</div>
+</div>
+
+<!-- SLIDE 2: WHAT WE DO -->
+<div class="slide">
+  <div class="slide-label">What We Do</div>
+  <h2>We deploy complete<br><span>AI workforces.</span></h2>
+  <div class="divider"></div>
+  <div class="two-col">
+    <div>
+      <p>Devolution Labs builds and operates enterprise AI workforces for organizations that want to reduce operating costs, scale faster, and outperform their competition — without adding headcount.</p>
+      <p>We ingest your company's data in seconds, then deploy a fully structured AI operating layer: a virtual executive at the top, functional departments in the middle, and specialized agents executing at the base.</p>
+      <p><strong>It runs on your infrastructure. Your data never leaves your environment.</strong> We manage the entire workforce as a monthly managed service, with the option to purchase outright at any point.</p>
+    </div>
+    <ul class="bullet-list">
+      <li>Built on <strong>Anthropic's Claude platform</strong> — enterprise-grade AI</li>
+      <li><strong>Full org chart structure</strong> — CEO, departments, teams, agents</li>
+      <li>Deployed and operational <strong>in days, not months</strong></li>
+      <li><strong>No AI engineers required</strong> on the client side</li>
+      <li>Live command dashboard — <strong>full leadership visibility</strong></li>
+      <li>Monthly managed service — <strong>own it outright at any time</strong></li>
+      <li>Every deployment scoped <strong>specifically to your business</strong></li>
+    </ul>
+  </div>
+  <div class="slide-number">02</div>
+</div>
+
+<!-- SLIDE 3: THE AI WORKFORCE STRUCTURE -->
+<div class="slide">
+  <div class="slide-label">The Architecture</div>
+  <h2>A complete org chart.<br><span>Built from AI agents.</span></h2>
+  <div class="org-wrap">
+    <div class="org-level">
+      <div class="org-node org-ceo">
+        <div class="node-icon ni-ceo">⬡</div>
+        <div class="nt"><div class="nl nl-ceo">LEVEL 1</div><div class="nn nn-ceo">AI Operations Executive</div></div>
+      </div>
+    </div>
+    <div class="vline"></div>
+    <div class="org-level" style="gap:24px;">
+      <div class="org-node org-dept">
+        <div class="node-icon ni-dept">◈</div>
+        <div class="nt"><div class="nl nl-dept">LEVEL 2</div><div class="nn nn-dept">Operations Dept</div></div>
+      </div>
+      <div class="org-node org-dept">
+        <div class="node-icon ni-dept">◈</div>
+        <div class="nt"><div class="nl nl-dept">LEVEL 2</div><div class="nn nn-dept">Marketing Dept</div></div>
+      </div>
+      <div class="org-node org-dept">
+        <div class="node-icon ni-dept">◈</div>
+        <div class="nt"><div class="nl nl-dept">LEVEL 2</div><div class="nn nn-dept">Finance Dept</div></div>
+      </div>
+      <div class="org-node org-dept">
+        <div class="node-icon ni-dept">◈</div>
+        <div class="nt"><div class="nl nl-dept">LEVEL 2</div><div class="nn nn-dept">Compliance Dept</div></div>
+      </div>
+    </div>
+    <div class="vline"></div>
+    <div class="org-level" style="gap:12px;">
+      <div class="org-node org-agent"><div class="nt"><div class="nl nl-agent">LEVEL 3</div><div class="nn nn-agent">Exception Agent</div></div></div>
+      <div class="org-node org-agent"><div class="nt"><div class="nl nl-agent">LEVEL 3</div><div class="nn nn-agent">Lead Gen Agent</div></div></div>
+      <div class="org-node org-agent"><div class="nt"><div class="nl nl-agent">LEVEL 3</div><div class="nn nn-agent">Reporting Agent</div></div></div>
+      <div class="org-node org-agent"><div class="nt"><div class="nl nl-agent">LEVEL 3</div><div class="nn nn-agent">Compliance Agent</div></div></div>
+      <div class="org-node org-agent"><div class="nt"><div class="nl nl-agent">LEVEL 3</div><div class="nn nn-agent">Content Agent</div></div></div>
+      <div class="org-node org-agent"><div class="nt"><div class="nl nl-agent">LEVEL 3</div><div class="nn nn-agent">SEO Agent</div></div></div>
+    </div>
+  </div>
+  <div class="slide-number">03</div>
+</div>
+
+<!-- SLIDE 4: WHAT EACH AGENT DOES -->
+<div class="slide">
+  <div class="slide-label">The Agent Capabilities</div>
+  <h2>Agents built for<br><span>every business function.</span></h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:24px;">
+    <div class="card card-cyan">
+      <div class="card-label label-cyan">Operations</div>
+      <h4>Exception + Routing Agent</h4>
+      <p>Monitors workflows in real time, routes tasks automatically, escalates only what requires human judgment. Runs 24/7 without instruction.</p>
+    </div>
+    <div class="card card-purple">
+      <div class="card-label label-purple">Marketing</div>
+      <h4>Content + SEO Agent</h4>
+      <p>Publishes optimized content weekly, manages social channels daily, tracks rankings, and adjusts strategy. No marketing staff needed.</p>
+    </div>
+    <div class="card card-blue">
+      <div class="card-label label-blue">Sales</div>
+      <h4>Lead Generation + Response Agent</h4>
+      <p>Actively finds in-market buyers, responds to every inbound inquiry in seconds, follows up until conversion. 150–300 qualified leads per month.</p>
+    </div>
+    <div class="card card-green">
+      <div class="card-label label-green">Finance</div>
+      <h4>Reporting + Analytics Agent</h4>
+      <p>Pulls data, compiles management reports, surfaces anomalies, and delivers leadership briefings on schedule. No analyst hours required.</p>
+    </div>
+    <div class="card card-amber">
+      <div class="card-label label-amber">Compliance</div>
+      <h4>Audit + Documentation Agent</h4>
+      <p>Monitors regulatory changes, maintains audit trails, generates required documentation, and flags exposure before it becomes a problem.</p>
+    </div>
+    <div class="card card-cyan">
+      <div class="card-label label-cyan">Customer Success</div>
+      <h4>Retention + Service Agent</h4>
+      <p>Sends reminders, books appointments, manages follow-up, and proactively reaches out to at-risk customers before they churn.</p>
+    </div>
+  </div>
+  <div class="slide-number">04</div>
+</div>
+
+<!-- SLIDE 4B: THE PLATFORM -->
+<div class="slide">
+  <div class="slide-label">The Platform</div>
+  <h2>The infrastructure<br><span>behind the workforce.</span></h2>
+  <p style="margin-bottom:20px;">Devolution Labs is built on a proprietary orchestration platform that functions as a complete AI operating system. Agents have roles, reporting lines, budgets, and goals. The system runs continuously, enforces governance, and keeps humans in full control.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+    <div class="card card-cyan">
+      <div class="card-label label-cyan">Architecture</div>
+      <h4>Org Chart Structure</h4>
+      <p>Every agent has a defined role, reporting line, and budget. The hierarchy mirrors your organization exactly from executive layer to individual task agents.</p>
+    </div>
+    <div class="card card-purple">
+      <div class="card-label label-purple">Intelligence</div>
+      <h4>Goal Alignment</h4>
+      <p>Every task traces back to the company mission. Agents understand what they are working on and why, ensuring every action advances your business objectives.</p>
+    </div>
+    <div class="card card-blue">
+      <div class="card-label label-blue">Operations</div>
+      <h4>Autonomous Scheduling</h4>
+      <p>Agents activate on a defined cadence, check their work queue, and execute without instruction. Delegation flows automatically up and down the org chart.</p>
+    </div>
+    <div class="card card-green">
+      <div class="card-label label-green">Finance</div>
+      <h4>Budget Enforcement</h4>
+      <p>Monthly budget limits per agent. When an agent reaches its limit it stops. No runaway costs. Full spend visibility at every level of the hierarchy.</p>
+    </div>
+    <div class="card card-amber">
+      <div class="card-label label-amber">Compliance</div>
+      <h4>Immutable Audit Log</h4>
+      <p>Every conversation, every decision, and every tool call is traced and logged. Full accountability across every agent in the system at all times.</p>
+    </div>
+    <div class="card card-cyan">
+      <div class="card-label label-cyan">Governance</div>
+      <h4>Human Override at Any Level</h4>
+      <p>You are the board. Approve strategies, override decisions, pause or terminate any agent at any time. The AI workforce reports to you.</p>
+    </div>
+  </div>
+  <div class="slide-number">04B</div>
+</div>
+
+<!-- SLIDE 5: HOW IT'S DEPLOYED -->
+<div class="slide">
+  <div class="slide-label">The Engagement Model</div>
+  <h2>Live in days.<br><span>Owned in 6 months.</span></h2>
+  <div class="two-col">
+    <div>
+      <p>Every Devolution Labs engagement begins with a scoped discovery. We learn your structure, your data, and your objectives. Then we build and deploy — typically within 3 to 5 business days after NDAs and access are in place.</p>
+      <p>Our model is a <strong>monthly managed service fee for up to 6 months</strong>. At any point during that period, the client can take full ownership of the platform outright, with ongoing support included.</p>
+      <p>No long-term commitment required upfront. No AI engineers needed on your side. We own the performance — not just the software.</p>
+    </div>
+    <div>
+      <div class="card card-cyan" style="margin-bottom:16px;">
+        <div class="card-label label-cyan">Month 1</div>
+        <h4>Deploy and activate</h4>
+        <p>Discovery, scoping, build, and go-live. First agents operational. Initial results within the first 30 days.</p>
+      </div>
+      <div class="card card-purple" style="margin-bottom:16px;">
+        <div class="card-label label-purple">Months 2–4</div>
+        <h4>Scale and optimize</h4>
+        <p>Additional agents deployed. System learns your data. Performance improves. Monthly reporting delivered.</p>
+      </div>
+      <div class="card card-blue">
+        <div class="card-label label-blue">Month 5–6 / Ongoing</div>
+        <h4>Own it outright</h4>
+        <p>Full platform ownership available at any time. Ongoing support included. AI workforce runs indefinitely.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">05</div>
+</div>
+
+<!-- SLIDE 6: CASE EXAMPLE — UPS -->
+<div class="slide">
+  <div class="slide-label">Client Example — Enterprise Logistics</div>
+  <div class="example-header">
+    <div>
+      <div class="example-industry">Fortune 500 · Logistics</div>
+      <div class="example-company">UPS — Package Delivery</div>
+      <div class="example-tagline">500,000+ employees · 8 US Regions · 100 Districts</div>
+    </div>
+    <div class="savings-pill">$1B+ / year at scale</div>
+  </div>
+  <div class="section-divider"></div>
+  <table>
+    <thead><tr><th>Function</th><th>Roles Replaced</th><th>6-Month Savings</th></tr></thead>
+    <tbody>
+      <tr><td>Operations Coordination</td><td>30–50 roles per district</td><td>$1.6M — $2.7M</td></tr>
+      <tr><td>Reporting and Analytics</td><td>15–25 roles per district</td><td>$800K — $1.35M</td></tr>
+      <tr><td>Customer Communications</td><td>40–70 roles per district</td><td>$1.7M — $3.0M</td></tr>
+      <tr><td>Vendor Coordination</td><td>20–35 roles per district</td><td>$850K — $1.5M</td></tr>
+      <tr class="total-row"><td>District Pilot Total</td><td>105–180 roles</td><td>$5M — $8.5M</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:16px;font-size:14px;">Deployment cost (6 months): <strong>$400K–$600K</strong> &nbsp;|&nbsp; Payback period: <strong style="color:#22d3ee">60–75 days</strong> &nbsp;|&nbsp; Full US deployment: <strong style="color:#22d3ee">$1B–$2B annually</strong></p>
+  <div class="slide-number">06</div>
+</div>
+
+<!-- SLIDE 7: CASE EXAMPLE — AUTOMOTIVE -->
+<div class="slide">
+  <div class="slide-label">Client Example — Automotive Retail</div>
+  <div class="example-header">
+    <div>
+      <div class="example-industry">Automotive Dealership · Long Island, NY</div>
+      <div class="example-company">South Shore CDJR + CRICH Cars</div>
+      <div class="example-tagline">Content · SEO · Lead Generation · Sales · Service</div>
+    </div>
+    <div class="savings-pill">$416K–$700K / 6 mo.</div>
+  </div>
+  <div class="section-divider"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:4px;">
+    <div class="card card-cyan">
+      <div class="card-label label-cyan">Lead Generation Agent</div>
+      <h4>150–250 qualified leads / month</h4>
+      <p>Actively finds in-market buyers on Facebook Marketplace, Craigslist, and local platforms. Qualifies and initiates first contact automatically. Adds 12–20 extra units sold per month.</p>
+    </div>
+    <div class="card card-purple">
+      <div class="card-label label-purple">SEO + Content Agent</div>
+      <h4>Replaces $3K–$6K/mo agency spend</h4>
+      <p>Publishes optimized vehicle listings, blog content, and local landing pages weekly. Manages social channels daily. Replaces full social media manager and SEO retainer.</p>
+    </div>
+    <div class="card card-blue">
+      <div class="card-label label-blue">Lead Response Agent</div>
+      <h4>Every lead answered in seconds, 24/7</h4>
+      <p>Instant personalized response to every form, email, and message. Qualifies, books test drives, and hands off when ready. Replaces BDC rep at $50K–$70K/year.</p>
+    </div>
+    <div class="card card-green">
+      <div class="card-label label-green">Service + Retention Agent</div>
+      <h4>$60K–$100K service revenue recaptured</h4>
+      <p>Automated service reminders, appointment booking, satisfaction follow-up, and lease-end outreach. Turns one-time buyers into lifetime customers.</p>
+    </div>
+  </div>
+  <div class="slide-number">07</div>
+</div>
+
+<!-- SLIDE 8: THE MARKET -->
+<div class="slide">
+  <div class="slide-label">The Market Opportunity</div>
+  <h2>Every industry.<br><span>Every function.</span></h2>
+  <div class="three-col" style="margin-top:28px;">
+    <div class="card card-cyan">
+      <div class="card-label label-cyan">Logistics + Supply Chain</div>
+      <h4>UPS, FedEx, Amazon</h4>
+      <p>Operations coordination, vendor management, compliance, customer communications. $500M–$3B annual savings potential at Fortune 500 scale.</p>
+    </div>
+    <div class="card card-purple">
+      <div class="card-label label-purple">Automotive Retail</div>
+      <h4>Single Dealers to Groups</h4>
+      <p>Lead generation, SEO, content, BDC replacement, service retention. $400K–$2M per location annually. Scales with dealer group size.</p>
+    </div>
+    <div class="card card-blue">
+      <div class="card-label label-blue">Financial Services</div>
+      <h4>Banks, Insurance, PE Firms</h4>
+      <p>Reporting automation, compliance documentation, client communications, portfolio monitoring. Massive headcount in functions fully automatable.</p>
+    </div>
+    <div class="card card-green">
+      <div class="card-label label-green">Healthcare + Operations</div>
+      <h4>Hospitals, Clinics, Networks</h4>
+      <p>Patient scheduling, billing coordination, compliance tracking, staff communication. High-volume structured workflows ready for AI replacement.</p>
+    </div>
+    <div class="card card-amber">
+      <div class="card-label label-amber">Real Estate + Property Mgmt</div>
+      <h4>REITs, Managers, Brokerages</h4>
+      <p>Lead response, tenant communications, maintenance coordination, listing management. Replaces coordinator-heavy back offices entirely.</p>
+    </div>
+    <div class="card card-cyan">
+      <div class="card-label label-cyan">Any Business With Repetitive Workflows</div>
+      <h4>The Universal Case</h4>
+      <p>If your organization has people spending significant time on structured, rule-based work — Devolution Labs replaces it. The market is every company.</p>
+    </div>
+  </div>
+  <div class="slide-number">08</div>
+</div>
+
+<!-- SLIDE 9: WHY DEVOLUTION LABS -->
+<div class="slide">
+  <div class="slide-label">Why Devolution Labs</div>
+  <h2>Not a tool.<br><span>A workforce we operate for you.</span></h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px;">
+    <div class="card card-cyan">
+      <div class="card-label label-cyan">Best-in-Class AI Models</div>
+      <h4>Every model. One workforce.</h4>
+      <p>Devolution Labs deploys agents powered by the most advanced AI models available including Claude, GPT-4, Gemini, and others. Each agent is matched to the right model for its role, balancing capability, speed, and cost.</p>
+    </div>
+    <div class="card card-purple">
+      <div class="card-label label-purple">Your infrastructure</div>
+      <h4>Your data never leaves</h4>
+      <p>Zero third-party cloud exposure. Runs on your servers, your private cloud, your environment. Built for organizations with strict data requirements.</p>
+    </div>
+    <div class="card card-blue">
+      <div class="card-label label-blue">Full managed service</div>
+      <h4>We own the performance</h4>
+      <p>Not software you manage. A workforce we operate. Monthly reporting on every metric. No AI engineers needed on your side.</p>
+    </div>
+    <div class="card card-green">
+      <div class="card-label label-green">Flexible ownership</div>
+      <h4>Buy it outright anytime</h4>
+      <p>Monthly fee for up to 6 months, then full ownership with ongoing support. No long-term commitment required to start.</p>
+    </div>
+    <div class="card card-amber">
+      <div class="card-label label-amber">Fast deployment</div>
+      <h4>Live in days, not months</h4>
+      <p>Typical deployment is 3–5 business days after NDAs and access are in place. First results within 30 days. Payback within 60.</p>
+    </div>
+    <div class="card card-cyan">
+      <div class="card-label label-cyan">Real-time visibility</div>
+      <h4>Command dashboard</h4>
+      <p>Leadership sees every agent, every workflow, every task in real time. Full control. Full accountability. Nothing executing without visibility.</p>
+    </div>
+  </div>
+  <div class="slide-number">09</div>
+</div>
+
+<!-- SLIDE 10: CLOSE -->
+<div class="slide slide-cover">
+  <div class="logo">Devolution Labs</div>
+  <div class="hero-num">The workforce<br>of the future.</div>
+  <div style="margin-top:28px;">
+    <p style="font-size:20px; color:#444; text-align:center; max-width:700px; margin:0 auto;">Built today. Deployed this week. Saving millions by next quarter.<br>Every company has the same bottleneck. We remove it.</p>
+  </div>
+  <div class="contact-block">
+    <a href="mailto:info@devolutionlab.com">info@devolutionlab.com</a>
+    <p>devolutionlab.com</p>
+  </div>
+  <div class="slide-number">10</div>
+</div>
+
+</body>
+</html>
