@@ -28,10 +28,10 @@ body { background: #0a0a0a; font-family: 'Helvetica Neue', Helvetica, Arial, san
 
 /* Nodes */
 .n { border-radius: 8px; font-weight: 700; white-space: nowrap; opacity: 0; transition: opacity 0.3s; text-align: center; }
-.n-ceo { background: rgba(34,211,238,0.12); border: 2px solid #22d3ee; color: #22d3ee; font-size: 16px; padding: 12px 32px; border-radius: 10px; }
-.n-vp { background: rgba(124,58,237,0.12); border: 1.5px solid #7c3aed; color: #c4b5fd; font-size: 13px; padding: 9px 16px; border-radius: 8px; min-width: 140px; }
-.n-dept { background: rgba(30,58,95,0.6); border: 1px solid #1e4a7a; color: #7ba8d4; font-size: 11px; padding: 7px 12px; border-radius: 6px; min-width: 100px; }
-.n-agent { background: rgba(10,20,35,0.9); border: 1px solid #162840; color: #4a7a9b; font-size: 10px; padding: 5px 9px; border-radius: 5px; min-width: 80px; }
+.n-ceo { background: rgba(34,211,238,0.12); border: 2px solid #22d3ee; color: #22d3ee; font-size: 22px; padding: 16px 48px; border-radius: 12px; }
+.n-vp { background: rgba(124,58,237,0.12); border: 1.5px solid #7c3aed; color: #c4b5fd; font-size: 17px; padding: 12px 22px; border-radius: 8px; min-width: 160px; }
+.n-dept { background: rgba(30,58,95,0.6); border: 1px solid #1e4a7a; color: #7ba8d4; font-size: 14px; padding: 9px 16px; border-radius: 7px; min-width: 120px; }
+.n-agent { background: rgba(10,20,35,0.9); border: 1px solid #162840; color: #7ba8d4; font-size: 13px; padding: 8px 14px; border-radius: 6px; min-width: 110px; }
 
 /* Lines */
 .vl { width: 2px; margin: 0 auto; opacity: 0; transition: opacity 0.3s; }
@@ -47,9 +47,9 @@ body { background: #0a0a0a; font-family: 'Helvetica Neue', Helvetica, Arial, san
 #s3 .s3h p { font-size: 15px; color: #444; letter-spacing: 3px; text-transform: uppercase; margin-top: 4px; }
 #s3.active .s3h { opacity: 1; }
 .dg { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; width: 100%; max-width: 1200px; }
-.dc { border-radius: 10px; padding: 16px 14px; opacity: 0; transition: opacity 0.25s; }
-.dc .dlbl { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 800; margin-bottom: 10px; }
-.dc .da { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.7); padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.05); line-height: 1.4; }
+.dc { border-radius: 10px; padding: 20px 18px; opacity: 0; transition: opacity 0.25s; }
+.dc .dlbl { font-size: 13px; letter-spacing: 3px; text-transform: uppercase; font-weight: 800; margin-bottom: 12px; }
+.dc .da { font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.85); padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.06); line-height: 1.4; }
 .dc .da:last-child { border-bottom: none; }
 
 /* S4 — CHAT */
@@ -105,7 +105,7 @@ body { background: #0a0a0a; font-family: 'Helvetica Neue', Helvetica, Arial, san
     <div class="hl" id="h1" style="width:820px;background:linear-gradient(to right,#7c3aed22,#7c3aed99,#7c3aed22);"></div>
 
     <!-- LEVEL 2: VP Layer (5 VPs) -->
-    <div class="row" id="l2" style="gap:12px;">
+    <div class="row" id="l2" style="gap:14px;">
       <div class="n n-vp">VP Revenue</div>
       <div class="n n-vp">VP Marketing</div>
       <div class="n n-vp">VP Operations</div>
@@ -136,11 +136,11 @@ body { background: #0a0a0a; font-family: 'Helvetica Neue', Helvetica, Arial, san
     <div class="hl" id="h3" style="width:1160px;background:linear-gradient(to right,#16284022,#16284099,#16284022);"></div>
 
     <!-- LEVEL 4: Individual Agents (24 agents) -->
-    <div class="row" id="l4a" style="gap:5px;max-width:1180px;">
+    <div class="row" id="l4a" style="gap:7px;max-width:1180px;">
       <div class="n n-agent">Lead Gen</div><div class="n n-agent">Lead Response</div><div class="n n-agent">Pipeline</div><div class="n n-agent">Proposals</div><div class="n n-agent">CRM Agent</div><div class="n n-agent">Renewals</div>
       <div class="n n-agent">SEO Agent</div><div class="n n-agent">Social Media</div><div class="n n-agent">Email Camps.</div><div class="n n-agent">Ad Spend</div><div class="n n-agent">Brand Monitor</div><div class="n n-agent">PR Outreach</div>
     </div>
-    <div class="row" id="l4b" style="gap:5px;max-width:1180px;margin-top:5px;">
+    <div class="row" id="l4b" style="gap:7px;max-width:1180px;margin-top:7px;">
       <div class="n n-agent">Dispatch</div><div class="n n-agent">Vendor Mgmt</div><div class="n n-agent">SLA Tracker</div><div class="n n-agent">Incidents</div><div class="n n-agent">Scheduling</div><div class="n n-agent">Quality Ctrl</div>
       <div class="n n-agent">Invoicing</div><div class="n n-agent">AR Agent</div><div class="n n-agent">Budgets</div><div class="n n-agent">Payroll</div><div class="n n-agent">Infra Monitor</div><div class="n n-agent">Security Agent</div>
     </div>
