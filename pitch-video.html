@@ -13,167 +13,246 @@ body { background: #0a0a0a; font-family: 'Helvetica Neue', Helvetica, Arial, san
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   opacity: 0; transition: opacity 0.8s ease;
-  padding: 60px;
+  padding: 40px 60px;
 }
 .scene.active { opacity: 1; }
 
-/* Progress bar */
 .progress {
   position: fixed; bottom: 0; left: 0;
   height: 3px; background: #22d3ee;
-  width: 0%; transition: width 0.1s linear;
-  z-index: 100;
+  width: 0%; transition: width 0.1s linear; z-index: 100;
 }
 
 /* Scene 1 */
 #s1 { background: #0a0a0a; }
-#s1 .pre { font-size: 18px; letter-spacing: 4px; text-transform: uppercase; color: #22d3ee; margin-bottom: 24px; opacity: 0; transition: opacity 0.6s 0.3s; }
-#s1 h1 { font-size: 62px; font-weight: 900; color: #fff; text-align: center; line-height: 1.1; max-width: 900px; opacity: 0; transition: opacity 0.6s 0.8s; }
+#s1 .pre { font-size: 13px; letter-spacing: 5px; text-transform: uppercase; color: #22d3ee; margin-bottom: 28px; opacity: 0; transition: opacity 0.6s 0.3s; font-weight: 700; }
+#s1 h1 { font-size: 66px; font-weight: 900; color: #fff; text-align: center; line-height: 1.1; max-width: 1000px; opacity: 0; transition: opacity 0.6s 0.8s; }
 #s1 h1 span { color: #22d3ee; }
 #s1.active .pre, #s1.active h1 { opacity: 1; }
 
-/* Scene 2 */
-#s2 { background: #0a0a0a; }
-#s2 .logo { font-size: 64px; font-weight: 900; color: #22d3ee; letter-spacing: -2px; margin-bottom: 12px; opacity: 0; transition: opacity 0.6s 0.3s; }
-#s2 .tagline { font-size: 22px; color: #fff; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 48px; opacity: 0; transition: opacity 0.6s 0.7s; }
-#s2 .orgchart { opacity: 0; transition: opacity 0.6s 1.2s; }
-#s2.active .logo, #s2.active .tagline, #s2.active .orgchart { opacity: 1; }
-.org-row { display: flex; justify-content: center; gap: 16px; margin-bottom: 0; }
-.org-node { border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 700; white-space: nowrap; }
-.node-ceo { background: rgba(34,211,238,0.15); border: 1.5px solid #22d3ee; color: #22d3ee; }
-.node-dept { background: rgba(139,92,246,0.15); border: 1.5px solid #8b5cf6; color: #a78bfa; }
-.node-agent { background: rgba(30,58,95,0.5); border: 1px solid #1e3a5f; color: #7ba8d4; font-size: 11px; }
-.org-line { width: 2px; height: 20px; background: linear-gradient(#22d3ee88,#8b5cf688); margin: 0 auto; }
-.org-hline { height: 2px; background: linear-gradient(to right, #8b5cf644, #8b5cf688, #8b5cf644); width: 340px; margin: 0 auto; }
+/* Scene 2 - Org Chart Full Company */
+#s2 { background: #0a0a0a; overflow: hidden; }
+#s2 .s2-title { font-size: 14px; letter-spacing: 5px; text-transform: uppercase; color: #22d3ee; margin-bottom: 24px; font-weight: 700; opacity: 0; transition: opacity 0.5s 0.2s; text-align: center; }
+#s2.active .s2-title { opacity: 1; }
+.full-org { width: 100%; max-width: 1160px; }
+.org-level { display: flex; justify-content: center; gap: 10px; margin-bottom: 0; }
+.org-node { border-radius: 7px; padding: 8px 14px; font-size: 11px; font-weight: 700; white-space: nowrap; text-align: center; opacity: 0; transition: opacity 0.3s; }
+.node-ceo { background: rgba(34,211,238,0.15); border: 1.5px solid #22d3ee; color: #22d3ee; font-size: 14px; padding: 11px 28px; }
+.node-dept { background: rgba(139,92,246,0.15); border: 1.5px solid #8b5cf6; color: #a78bfa; font-size: 12px; padding: 9px 16px; }
+.node-agent { background: rgba(14,28,50,0.8); border: 1px solid #1e3a5f; color: #7ba8d4; font-size: 10px; padding: 6px 10px; }
+.vline { width: 2px; height: 18px; margin: 0 auto; }
+.vline-ceo { background: linear-gradient(#22d3ee88,#8b5cf688); }
+.vline-dept { background: linear-gradient(#8b5cf688,#1e3a5f88); }
+.hline { height: 2px; margin: 0 auto; }
 
-/* Scene 3 */
-#s3 { background: #0a0a0a; }
-#s3 h2 { font-size: 52px; font-weight: 900; color: #fff; margin-bottom: 8px; opacity: 0; transition: opacity 0.5s 0.3s; }
+/* Scene 3 - 40 Agents Grid */
+#s3 { background: #0a0a0a; padding: 32px 50px; }
+#s3 .s3-title { font-size: 13px; letter-spacing: 5px; text-transform: uppercase; color: #22d3ee; margin-bottom: 8px; font-weight: 700; opacity: 0; transition: opacity 0.5s 0.2s; }
+#s3 h2 { font-size: 48px; font-weight: 900; color: #fff; margin-bottom: 24px; opacity: 0; transition: opacity 0.5s 0.5s; }
 #s3 h2 span { color: #22d3ee; }
-#s3 .sub { font-size: 16px; color: #555; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 36px; opacity: 0; transition: opacity 0.5s 0.6s; }
-.cards-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; max-width: 900px; }
-.agent-card { background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 10px; padding: 20px; opacity: 0; }
-.agent-card .albl { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; }
-.agent-card h4 { font-size: 14px; font-weight: 700; color: #fff; }
-.agent-card p { font-size: 11px; color: #666; margin-top: 4px; line-height: 1.5; }
-#s3.active h2, #s3.active .sub { opacity: 1; }
+#s3.active .s3-title, #s3.active h2 { opacity: 1; }
+.agents-grid { display: grid; grid-template-columns: repeat(8,1fr); gap: 8px; width: 100%; }
+.ag { background: #0d0d0d; border: 1px solid #141414; border-radius: 8px; padding: 10px 8px; opacity: 0; transition: opacity 0.25s; }
+.ag .dept-tag { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+.ag .agent-name { font-size: 10px; font-weight: 700; color: #ddd; line-height: 1.3; }
 
-/* Scene 4 */
+/* Scene 4 - Chat */
 #s4 { background: #0a0a0a; }
-#s4 h2 { font-size: 44px; font-weight: 900; color: #fff; margin-bottom: 32px; opacity: 0; transition: opacity 0.5s 0.3s; }
+#s4 h2 { font-size: 46px; font-weight: 900; color: #fff; margin-bottom: 28px; opacity: 0; transition: opacity 0.5s 0.3s; }
 #s4 h2 span { color: #22d3ee; }
-.chat-window { background: #060e1a; border: 1.5px solid #22d3ee; border-radius: 12px; padding: 28px; max-width: 640px; width: 100%; box-shadow: 0 0 40px rgba(34,211,238,0.1); opacity: 0; transition: opacity 0.6s 0.8s; }
+.chat-window { background: #060e1a; border: 1.5px solid #22d3ee; border-radius: 12px; padding: 28px; max-width: 700px; width: 100%; box-shadow: 0 0 40px rgba(34,211,238,0.1); opacity: 0; transition: opacity 0.6s 0.8s; }
 .chat-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #22d3ee; margin-bottom: 20px; font-weight: 700; }
-.bubble { border-radius: 10px; padding: 12px 16px; margin-bottom: 12px; max-width: 90%; }
-.bubble.user { background: rgba(34,211,238,0.15); border: 1px solid rgba(34,211,238,0.3); color: #fff; font-size: 14px; margin-left: auto; }
+.bubble { border-radius: 10px; padding: 12px 16px; margin-bottom: 10px; max-width: 90%; transition: opacity 0.4s; }
+.bubble.user { background: rgba(34,211,238,0.12); border: 1px solid rgba(34,211,238,0.3); color: #fff; font-size: 14px; margin-left: auto; }
 .bubble.system { background: rgba(30,58,95,0.4); border: 1px solid #1e3a5f; color: #94a3b8; font-size: 14px; }
 .bubble span { color: #22d3ee; font-weight: 700; }
-.typing { color: #22d3ee; font-size: 20px; letter-spacing: 4px; }
 #s4.active h2, #s4.active .chat-window { opacity: 1; }
 
-/* Scene 5 */
+/* Scene 5 - Counter */
 #s5 { background: #0a0a0a; }
-#s5 .counter-wrap { text-align: center; opacity: 0; transition: opacity 0.6s 0.3s; }
-#s5 .counter { font-size: 120px; font-weight: 900; color: #22d3ee; line-height: 1; letter-spacing: -6px; }
-#s5 .counter-label { font-size: 20px; color: #666; text-transform: uppercase; letter-spacing: 3px; margin-top: 16px; }
-#s5 .counter-sub { font-size: 15px; color: #333; margin-top: 8px; }
-#s5.active .counter-wrap { opacity: 1; }
+#s5 .cw { text-align: center; opacity: 0; transition: opacity 0.6s 0.3s; }
+#s5 .counter { font-size: 130px; font-weight: 900; color: #22d3ee; line-height: 1; letter-spacing: -6px; }
+#s5 .clabel { font-size: 22px; color: #777; text-transform: uppercase; letter-spacing: 3px; margin-top: 16px; }
+#s5 .csub { font-size: 15px; color: #333; margin-top: 8px; }
+#s5 .csub2 { font-size: 14px; color: #22d3ee; margin-top: 24px; letter-spacing: 2px; opacity: 0; transition: opacity 0.5s 2.5s; }
+#s5.active .cw { opacity: 1; }
+#s5.active .csub2 { opacity: 1; }
 
 /* Scene 6 */
 #s6 { background: radial-gradient(ellipse at 50% 30%, #071522 0%, #0a0a0a 65%); }
-#s6 .dl-logo { font-size: 72px; font-weight: 900; color: #22d3ee; letter-spacing: -3px; margin-bottom: 16px; opacity: 0; transition: opacity 0.8s 0.3s; }
-#s6 .dl-url { font-size: 28px; color: #fff; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; opacity: 0; transition: opacity 0.8s 0.7s; }
-#s6 .dl-cta { font-size: 18px; color: #444; letter-spacing: 2px; opacity: 0; transition: opacity 0.8s 1.1s; }
-#s6 .dl-tag { font-size: 12px; letter-spacing: 5px; text-transform: uppercase; color: #22d3ee; margin-top: 32px; opacity: 0; transition: opacity 0.8s 1.5s; font-weight: 700; }
+#s6 .dl-logo { font-size: 80px; font-weight: 900; color: #22d3ee; letter-spacing: -3px; margin-bottom: 16px; opacity: 0; transition: opacity 0.8s 0.3s; }
+#s6 .dl-url { font-size: 26px; color: #fff; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 12px; opacity: 0; transition: opacity 0.8s 0.8s; }
+#s6 .dl-cta { font-size: 18px; color: #444; letter-spacing: 2px; opacity: 0; transition: opacity 0.8s 1.2s; }
+#s6 .dl-tag { font-size: 12px; letter-spacing: 6px; text-transform: uppercase; color: #22d3ee; margin-top: 40px; opacity: 0; transition: opacity 0.8s 1.6s; font-weight: 700; }
 #s6.active .dl-logo, #s6.active .dl-url, #s6.active .dl-cta, #s6.active .dl-tag { opacity: 1; }
 
-/* Replay button */
 .replay-btn {
-  position: fixed; bottom: 24px; right: 24px;
+  position: fixed; bottom: 20px; right: 20px;
   background: rgba(34,211,238,0.1); border: 1px solid #22d3ee;
   color: #22d3ee; padding: 10px 24px; border-radius: 100px;
-  font-size: 13px; font-weight: 700; letter-spacing: 2px;
+  font-size: 12px; font-weight: 700; letter-spacing: 2px;
   text-transform: uppercase; cursor: pointer; opacity: 0;
-  transition: opacity 0.5s, background 0.2s;
-  z-index: 200; font-family: Arial;
+  transition: opacity 0.5s; z-index: 200; font-family: Arial;
 }
-.replay-btn:hover { background: rgba(34,211,238,0.2); }
 .replay-btn.visible { opacity: 1; }
 </style>
 </head>
 <body>
 
-<!-- SCENE 1 -->
+<!-- SCENE 1: HOOK -->
 <div class="scene" id="s1">
   <div class="pre">Devolution Lab</div>
   <h1>Most companies still hire people<br>to do work <span>AI can own.</span></h1>
 </div>
 
-<!-- SCENE 2 -->
+<!-- SCENE 2: FULL ORG CHART - 40 AGENTS -->
 <div class="scene" id="s2">
-  <div class="logo">Devolution Lab</div>
-  <div class="tagline">AI Workforces for Enterprise</div>
-  <div class="orgchart">
-    <div class="org-row">
+  <div class="s2-title">A complete AI company — 40 agents, 5 departments, one hierarchy</div>
+  <div class="full-org">
+    <!-- Level 1: CEO -->
+    <div class="org-level" id="org-l1">
       <div class="org-node node-ceo">⬡ AI Operations Executive</div>
     </div>
-    <div class="org-line"></div>
-    <div class="org-hline"></div>
-    <div class="org-row" style="gap:12px;margin-top:0;">
-      <div class="org-node node-dept">◈ Operations</div>
-      <div class="org-node node-dept">◈ Marketing</div>
-      <div class="org-node node-dept">◈ Finance</div>
-      <div class="org-node node-dept">◈ Compliance</div>
+    <div class="vline vline-ceo" style="height:22px;" id="org-v1"></div>
+    <div class="hline" style="width:900px;background:linear-gradient(to right,#8b5cf622,#8b5cf688,#8b5cf622);" id="org-h1"></div>
+
+    <!-- Level 2: Departments -->
+    <div class="org-level" style="gap:14px;" id="org-l2">
+      <div class="org-node node-dept" style="min-width:150px;">◈ Sales and Growth</div>
+      <div class="org-node node-dept" style="min-width:150px;">◈ Marketing</div>
+      <div class="org-node node-dept" style="min-width:150px;">◈ Operations</div>
+      <div class="org-node node-dept" style="min-width:150px;">◈ Finance</div>
+      <div class="org-node node-dept" style="min-width:150px;">◈ Compliance</div>
     </div>
-    <div class="org-line" style="background:linear-gradient(#8b5cf688,#1e3a5f88);"></div>
-    <div class="org-hline" style="width:560px;background:linear-gradient(to right,#1e3a5f44,#1e3a5f88,#1e3a5f44);"></div>
-    <div class="org-row" style="gap:8px;margin-top:0;flex-wrap:wrap;max-width:700px;">
+    <div class="vline" style="height:18px;background:linear-gradient(#8b5cf688,#1e3a5f88);" id="org-v2"></div>
+    <div class="hline" style="width:1100px;background:linear-gradient(to right,#1e3a5f33,#1e3a5f88,#1e3a5f33);" id="org-h2"></div>
+
+    <!-- Level 3: Agents row 1 (20 agents) -->
+    <div class="org-level" style="gap:6px;flex-wrap:wrap;max-width:1160px;justify-content:center;" id="org-l3a">
       <div class="org-node node-agent">Lead Gen</div>
-      <div class="org-node node-agent">Dispatch</div>
-      <div class="org-node node-agent">Reporting</div>
-      <div class="org-node node-agent">Billing</div>
-      <div class="org-node node-agent">Compliance</div>
-      <div class="org-node node-agent">Retention</div>
+      <div class="org-node node-agent">Lead Response</div>
+      <div class="org-node node-agent">Pipeline Tracker</div>
+      <div class="org-node node-agent">Demo Scheduler</div>
+      <div class="org-node node-agent">CRM Updater</div>
+      <div class="org-node node-agent">Win/Loss Analyst</div>
+      <div class="org-node node-agent">Proposal Agent</div>
+      <div class="org-node node-agent">Account Renewal</div>
+      <div class="org-node node-agent">Content Agent</div>
+      <div class="org-node node-agent">SEO Agent</div>
+      <div class="org-node node-agent">Social Media</div>
+      <div class="org-node node-agent">Email Campaigns</div>
+      <div class="org-node node-agent">Ad Spend Optimizer</div>
+      <div class="org-node node-agent">Reputation Agent</div>
+      <div class="org-node node-agent">Event Scheduler</div>
+      <div class="org-node node-agent">Brand Monitor</div>
+      <div class="org-node node-agent">Dispatch Agent</div>
+      <div class="org-node node-agent">Exception Handler</div>
+      <div class="org-node node-agent">Vendor Manager</div>
+      <div class="org-node node-agent">SLA Tracker</div>
+    </div>
+
+    <!-- Level 3: Agents row 2 (20 agents) -->
+    <div class="org-level" style="gap:6px;flex-wrap:wrap;max-width:1160px;justify-content:center;margin-top:6px;" id="org-l3b">
+      <div class="org-node node-agent">Scheduling Agent</div>
+      <div class="org-node node-agent">Quality Control</div>
+      <div class="org-node node-agent">Incident Response</div>
+      <div class="org-node node-agent">Maintenance Track</div>
+      <div class="org-node node-agent">Invoice Agent</div>
+      <div class="org-node node-agent">Billing Tracker</div>
+      <div class="org-node node-agent">AR Collections</div>
+      <div class="org-node node-agent">Budget Monitor</div>
+      <div class="org-node node-agent">Payroll Prep</div>
+      <div class="org-node node-agent">Expense Tracker</div>
+      <div class="org-node node-agent">Financial Reports</div>
+      <div class="org-node node-agent">Tax Document Agent</div>
+      <div class="org-node node-agent">Regulatory Monitor</div>
+      <div class="org-node node-agent">Audit Trail Agent</div>
+      <div class="org-node node-agent">Policy Updater</div>
+      <div class="org-node node-agent">Risk Flagging Agent</div>
+      <div class="org-node node-agent">Cert Tracker</div>
+      <div class="org-node node-agent">Retention Agent</div>
+      <div class="org-node node-agent">Onboarding Agent</div>
+      <div class="org-node node-agent">Referral Agent</div>
     </div>
   </div>
 </div>
 
-<!-- SCENE 3 -->
+<!-- SCENE 3: 40 AGENTS BREAKDOWN -->
 <div class="scene" id="s3">
-  <h2><span>12</span> AI Agents.</h2>
-  <div class="sub">Every business function covered</div>
-  <div class="cards-grid">
-    <div class="agent-card" id="c1"><div class="albl" style="color:#22d3ee;">Operations</div><h4>Route and Dispatch Agent</h4><p>Monitors exceptions, routes tasks, escalates blockers in real time.</p></div>
-    <div class="agent-card" id="c2"><div class="albl" style="color:#8b5cf6;">Marketing</div><h4>Content and SEO Agent</h4><p>Publishes content daily, tracks rankings, manages social channels.</p></div>
-    <div class="agent-card" id="c3"><div class="albl" style="color:#3b82f6;">Sales</div><h4>Lead Generation Agent</h4><p>Finds and qualifies in-market buyers around the clock.</p></div>
-    <div class="agent-card" id="c4"><div class="albl" style="color:#10b981;">Finance</div><h4>Billing and Invoice Agent</h4><p>Generates invoices, tracks payments, flags overdue accounts.</p></div>
-    <div class="agent-card" id="c5"><div class="albl" style="color:#f59e0b;">Compliance</div><h4>Audit and Documentation Agent</h4><p>Monitors regulations, maintains audit trails, flags exposure.</p></div>
-    <div class="agent-card" id="c6"><div class="albl" style="color:#ec4899;">Retention</div><h4>Customer Retention Agent</h4><p>Reaches out to at-risk customers before they leave.</p></div>
+  <div class="s3-title">The Full Workforce</div>
+  <h2><span>40 agents.</span> 5 departments. Running 24/7.</h2>
+  <div class="agents-grid">
+    <!-- Sales (8) -->
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">Lead Generation</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">Lead Response</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">Pipeline Tracker</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">Demo Scheduler</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">Proposal Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">CRM Updater</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">Win/Loss Analyst</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">Account Renewal</div></div>
+    <!-- Marketing (8) -->
+    <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Content Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">SEO Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Social Media</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Email Campaigns</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Ad Spend Optimizer</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Reputation Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Event Scheduler</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Brand Monitor</div></div>
+    <!-- Operations (8) -->
+    <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Dispatch Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Exception Handler</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Vendor Manager</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">SLA Tracker</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Scheduling Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Quality Control</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Incident Response</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Maintenance Track</div></div>
+    <!-- Finance (8) -->
+    <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Invoice Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Billing Tracker</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">AR Collections</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Budget Monitor</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Payroll Prep</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Expense Tracker</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Financial Reports</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Tax Document</div></div>
+    <!-- Compliance (8) -->
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Regulatory Monitor</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Audit Trail</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Policy Updater</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Risk Flagging</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Cert Tracker</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Retention Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Onboarding Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Referral Agent</div></div>
   </div>
 </div>
 
-<!-- SCENE 4 -->
+<!-- SCENE 4: CHAT -->
 <div class="scene" id="s4">
   <h2>Managing it is a <span>conversation.</span></h2>
   <div class="chat-window">
-    <div class="chat-label">Devolution Lab — Live AI Workforce</div>
+    <div class="chat-label">Devolution Lab — Live AI Workforce (40 Agents Active)</div>
     <div class="bubble user" id="q1" style="opacity:0;">How many leads came in this week?</div>
-    <div class="bubble system" id="a1" style="opacity:0;"><span>47</span> inbound leads this week. <span>12</span> qualified and routed to sales. <span>6</span> deals in progress.</div>
-    <div class="bubble user" id="q2" style="opacity:0;">Flag anything that needs my attention today.</div>
-    <div class="bubble system" id="a2" style="opacity:0;"><span>2 items flagged:</span> Apex vendor missed SLA — escalation sent. Q2 forecast 14% above plan — board summary ready.</div>
+    <div class="bubble system" id="a1" style="opacity:0;"><span>47</span> inbound leads. <span>12</span> qualified and routed to sales. <span>6</span> deals in progress. Proposal Agent has drafted 3 proposals automatically.</div>
+    <div class="bubble user" id="q2" style="opacity:0;">What needs my attention today across all departments?</div>
+    <div class="bubble system" id="a2" style="opacity:0;"><span>3 items flagged:</span> Apex vendor missed SLA — escalation sent. Q2 forecast 14% above plan — board summary ready. Compliance cert expires in 14 days — renewal initiated.</div>
   </div>
 </div>
 
-<!-- SCENE 5 -->
+<!-- SCENE 5: COUNTER -->
 <div class="scene" id="s5">
-  <div class="counter-wrap">
+  <div class="cw">
     <div class="counter" id="counter">$0</div>
-    <div class="counter-label">Annual savings potential at full scale</div>
-    <div class="counter-sub">Based on Fortune 500 enterprise deployments</div>
+    <div class="clabel">Annual savings potential at full scale</div>
+    <div class="csub">Based on Fortune 500 enterprise deployments</div>
+    <div class="csub2">40 agents. 5 departments. Zero coordination overhead.</div>
   </div>
 </div>
 
-<!-- SCENE 6 -->
+<!-- SCENE 6: CLOSE -->
 <div class="scene" id="s6">
   <div class="dl-logo">Devolution Lab</div>
   <div class="dl-url">devolutionlab.com</div>
@@ -185,55 +264,95 @@ body { background: #0a0a0a; font-family: 'Helvetica Neue', Helvetica, Arial, san
 <button class="replay-btn" id="replayBtn" onclick="startAnimation()">Replay</button>
 
 <script>
-const SCENE_DURATION = 5000;
+const SCENE_DURATION = 7000;
 const TOTAL = 6;
 let currentScene = 0;
 let timer = null;
 let startTime = null;
 
 const scenes = ['s1','s2','s3','s4','s5','s6'];
-const cardIds = ['c1','c2','c3','c4','c5','c6'];
+
+function animateOrgChart() {
+  const delay = 300;
+  const nodeGroups = [
+    ['org-l1'],
+    ['org-v1','org-h1'],
+    ['org-l2'],
+    ['org-v2','org-h2'],
+    ['org-l3a'],
+    ['org-l3b'],
+  ];
+  nodeGroups.forEach((group, gi) => {
+    setTimeout(() => {
+      group.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (el.classList.contains('org-level')) {
+          [...el.querySelectorAll('.org-node')].forEach((n,ni) => {
+            setTimeout(() => { n.style.opacity='1'; n.style.transition='opacity 0.3s'; }, ni*50);
+          });
+        } else {
+          el.style.opacity='1';
+          el.style.transition='opacity 0.3s';
+        }
+      });
+    }, delay + gi * 400);
+  });
+}
+
+function animateAgentCards() {
+  const cards = document.querySelectorAll('.ag');
+  cards.forEach((c,i) => {
+    setTimeout(() => {
+      c.style.opacity='1';
+      c.style.transition='opacity 0.2s';
+    }, 600 + i * 55);
+  });
+}
+
+function resetOrgChart() {
+  document.querySelectorAll('.org-node').forEach(n => { n.style.opacity='0'; n.style.transition='none'; });
+  ['org-v1','org-h1','org-v2','org-h2'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el){ el.style.opacity='0'; el.style.transition='none'; }
+  });
+}
+
+function resetCards() {
+  document.querySelectorAll('.ag').forEach(c => { c.style.opacity='0'; c.style.transition='none'; });
+}
 
 function showScene(idx) {
   scenes.forEach((id, i) => {
     document.getElementById(id).classList.toggle('active', i === idx);
   });
 
-  if (idx === 2) {
-    // Stagger cards
-    cardIds.forEach((id, i) => {
-      const el = document.getElementById(id);
-      el.style.opacity = '0';
+  if (idx === 1) animateOrgChart();
+  if (idx === 2) animateAgentCards();
+
+  if (idx === 3) {
+    ['q1','a1','q2','a2'].forEach((id,i) => {
       setTimeout(() => {
-        el.style.transition = 'opacity 0.4s';
-        el.style.opacity = '1';
-      }, 800 + i * 180);
+        const el = document.getElementById(id);
+        el.style.opacity='1'; el.style.transition='opacity 0.4s';
+      }, 600 + i*1100);
     });
   }
 
-  if (idx === 3) {
-    // Chat animation
-    setTimeout(() => { document.getElementById('q1').style.opacity='1'; document.getElementById('q1').style.transition='opacity 0.4s'; }, 600);
-    setTimeout(() => { document.getElementById('a1').style.opacity='1'; document.getElementById('a1').style.transition='opacity 0.4s'; }, 1400);
-    setTimeout(() => { document.getElementById('q2').style.opacity='1'; document.getElementById('q2').style.transition='opacity 0.4s'; }, 2500);
-    setTimeout(() => { document.getElementById('a2').style.opacity='1'; document.getElementById('a2').style.transition='opacity 0.4s'; }, 3400);
-  }
-
   if (idx === 4) {
-    // Counter animation
     let start = 0;
     const target = 1000000000;
-    const duration = 3500;
+    const duration = 4000;
     const startTs = performance.now();
     function updateCounter(ts) {
       const elapsed = ts - startTs;
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       const value = Math.floor(eased * target);
-      const formatted = value >= 1000000000 ? '$1B+' :
+      const fmt = value >= 1000000000 ? '$1B+' :
         value >= 1000000 ? '$' + (value/1000000).toFixed(0) + 'M' :
         value >= 1000 ? '$' + (value/1000).toFixed(0) + 'K' : '$' + value;
-      document.getElementById('counter').textContent = formatted;
+      document.getElementById('counter').textContent = fmt;
       if (progress < 1) requestAnimationFrame(updateCounter);
     }
     setTimeout(() => requestAnimationFrame(updateCounter), 400);
@@ -247,11 +366,12 @@ function startAnimation() {
   document.getElementById('replayBtn').classList.remove('visible');
   document.getElementById('progress').style.width = '0%';
 
-  // Reset chat bubbles
   ['q1','a1','q2','a2'].forEach(id => {
-    document.getElementById(id).style.opacity = '0';
-    document.getElementById(id).style.transition = 'none';
+    const el = document.getElementById(id);
+    el.style.opacity='0'; el.style.transition='none';
   });
+  resetOrgChart();
+  resetCards();
 
   showScene(0);
 
@@ -265,7 +385,6 @@ function startAnimation() {
     showScene(currentScene);
   }, SCENE_DURATION);
 
-  // Progress bar
   const progressBar = document.getElementById('progress');
   const totalDuration = SCENE_DURATION * TOTAL;
   function updateProgress() {
@@ -277,8 +396,7 @@ function startAnimation() {
   requestAnimationFrame(updateProgress);
 }
 
-// Auto-start
-window.addEventListener('load', () => setTimeout(startAnimation, 500));
+window.addEventListener('load', () => setTimeout(startAnimation, 600));
 </script>
 </body>
 </html>
