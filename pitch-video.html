@@ -322,78 +322,121 @@ body::before {
   <div class="tagline">Structured. Managed. Running 24/7.</div>
 </div>
 
-<!-- SCENE 4: ORG CHART SIMPLE -->
-<div class="scene" id="s4" style="justify-content:center;">
-  <div style="text-align:center;margin-bottom:40px;opacity:0;transform:translateY(16px);transition:opacity 0.5s 0.1s,transform 0.5s 0.1s;" id="s4h">
-    <div style="font-size:13px;letter-spacing:6px;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:14px;">The Structure</div>
-    <div style="font-size:52px;font-weight:900;letter-spacing:-2px;color:#fff;">One <span style="color:#22d3ee;">hierarchy.</span></div>
-  </div>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:0;width:100%;max-width:900px;">
-    <div id="oc1" style="opacity:0;transform:translateY(16px);transition:opacity 0.5s,transform 0.5s;">
-      <div style="background:rgba(34,211,238,0.1);border:2px solid #22d3ee;color:#22d3ee;font-size:22px;font-weight:900;padding:18px 52px;border-radius:14px;box-shadow:0 0 40px rgba(34,211,238,0.2);letter-spacing:1px;">AI Operations Executive</div>
+<!-- SCENE 4: CINEMATIC ORG FLOW -->
+<div class="scene" id="s4" style="background:radial-gradient(ellipse at 50% 30%,rgba(124,58,237,0.1) 0%,transparent 65%);">
+<style>
+.flow-label{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:#7c3aed;font-weight:800;margin-bottom:16px;opacity:0;transition:opacity 0.5s 0.1s;}
+.flow-title{font-size:56px;font-weight:900;letter-spacing:-2px;color:#fff;margin-bottom:48px;opacity:0;transition:opacity 0.6s 0.3s;}
+.flow-title em{color:#22d3ee;font-style:normal;}
+.flow-wrap{display:flex;flex-direction:column;align-items:center;width:100%;max-width:860px;}
+.flow-node{border-radius:14px;font-weight:800;text-align:center;opacity:0;transform:scale(0.85);transition:opacity 0.45s,transform 0.45s,box-shadow 0.45s;}
+.flow-node.show{opacity:1;transform:scale(1);}
+.fn-ceo{background:rgba(34,211,238,0.08);border:2px solid #22d3ee;color:#22d3ee;font-size:22px;padding:18px 64px;width:100%;box-shadow:0 0 0 rgba(34,211,238,0);}
+.fn-ceo.show{box-shadow:0 0 50px rgba(34,211,238,0.2);}
+.flow-conn{display:flex;align-items:center;width:100%;justify-content:center;opacity:0;transition:opacity 0.3s;}
+.fc-line{width:2px;height:26px;background:linear-gradient(#22d3ee88,#7c3aed88);}
+.flow-row{display:flex;gap:12px;width:100%;justify-content:center;}
+.fn-vp{background:rgba(124,58,237,0.08);border:1.5px solid rgba(124,58,237,0.25);color:#c4b5fd;font-size:17px;padding:14px 0;flex:1;border-radius:12px;transition:opacity 0.35s,transform 0.35s,border-color 0.3s;opacity:0;transform:translateY(16px);}
+.fn-vp.show{opacity:1;transform:translateY(0);border-color:#7c3aed;}
+.fn-agents{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:820px;}
+.fn-ag{background:rgba(10,20,40,0.9);border:1px solid #1e3a5f;color:#64a3c8;font-size:15px;font-weight:700;padding:10px 18px;border-radius:10px;opacity:0;transition:opacity 0.2s,transform 0.2s;transform:translateY(10px);}
+.fn-ag.show{opacity:1;transform:translateY(0);}
+</style>
+  <div class="flow-label" id="fl">The Architecture</div>
+  <div class="flow-title" id="ft">Built like a <em>real company.</em></div>
+  <div class="flow-wrap">
+    <div class="flow-node fn-ceo" id="f-ceo">&#11042; &nbsp; AI Operations Executive</div>
+    <div class="flow-conn" id="f-c1"><div class="fc-line"></div></div>
+    <div class="flow-row" id="f-vps">
+      <div class="fn-vp" id="fv1">Revenue</div>
+      <div class="fn-vp" id="fv2">Marketing</div>
+      <div class="fn-vp" id="fv3">Operations</div>
+      <div class="fn-vp" id="fv4">Finance</div>
+      <div class="fn-vp" id="fv5">Technology</div>
     </div>
-    <div id="oc-v1" style="width:2px;height:28px;background:linear-gradient(#22d3ee,#7c3aed);margin:0 auto;opacity:0;transition:opacity 0.4s;"></div>
-    <div id="oc2" style="display:flex;gap:12px;opacity:0;transition:opacity 0.4s;">
-      <div style="background:rgba(124,58,237,0.1);border:1.5px solid #7c3aed;color:#c4b5fd;font-size:18px;font-weight:800;padding:14px 28px;border-radius:12px;">Revenue</div>
-      <div style="background:rgba(124,58,237,0.1);border:1.5px solid #7c3aed;color:#c4b5fd;font-size:18px;font-weight:800;padding:14px 28px;border-radius:12px;">Marketing</div>
-      <div style="background:rgba(124,58,237,0.1);border:1.5px solid #7c3aed;color:#c4b5fd;font-size:18px;font-weight:800;padding:14px 28px;border-radius:12px;">Operations</div>
-      <div style="background:rgba(124,58,237,0.1);border:1.5px solid #7c3aed;color:#c4b5fd;font-size:18px;font-weight:800;padding:14px 28px;border-radius:12px;">Finance</div>
-      <div style="background:rgba(124,58,237,0.1);border:1.5px solid #7c3aed;color:#c4b5fd;font-size:18px;font-weight:800;padding:14px 28px;border-radius:12px;">Technology</div>
-    </div>
-    <div id="oc-v2" style="width:2px;height:28px;background:linear-gradient(#7c3aed,#1e4a7a);margin:0 auto;opacity:0;transition:opacity 0.4s;"></div>
-    <div id="oc3" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:900px;opacity:0;transition:opacity 0.4s;">
-      <div style="background:rgba(14,30,58,0.9);border:1px solid #1e4a7a;color:#7ba8d4;font-size:16px;font-weight:700;padding:11px 20px;border-radius:10px;">Lead Gen</div>
-      <div style="background:rgba(14,30,58,0.9);border:1px solid #1e4a7a;color:#7ba8d4;font-size:16px;font-weight:700;padding:11px 20px;border-radius:10px;">Content</div>
-      <div style="background:rgba(14,30,58,0.9);border:1px solid #1e4a7a;color:#7ba8d4;font-size:16px;font-weight:700;padding:11px 20px;border-radius:10px;">Dispatch</div>
-      <div style="background:rgba(14,30,58,0.9);border:1px solid #1e4a7a;color:#7ba8d4;font-size:16px;font-weight:700;padding:11px 20px;border-radius:10px;">Invoicing</div>
-      <div style="background:rgba(14,30,58,0.9);border:1px solid #1e4a7a;color:#7ba8d4;font-size:16px;font-weight:700;padding:11px 20px;border-radius:10px;">Security</div>
-      <div style="background:rgba(14,30,58,0.9);border:1px solid #1e4a7a;color:#7ba8d4;font-size:16px;font-weight:700;padding:11px 20px;border-radius:10px;">Compliance</div>
-      <div style="background:rgba(14,30,58,0.9);border:1px solid #1e4a7a;color:#7ba8d4;font-size:16px;font-weight:700;padding:11px 20px;border-radius:10px;">Scheduling</div>
-      <div style="background:rgba(14,30,58,0.9);border:1px solid #1e4a7a;color:#7ba8d4;font-size:16px;font-weight:700;padding:11px 20px;border-radius:10px;">Reporting</div>
+    <div class="flow-conn" id="f-c2" style="margin-top:4px;"><div class="fc-line" style="background:linear-gradient(#7c3aed88,#1e4a7a88);"></div></div>
+    <div class="fn-agents" id="f-ags">
+      <div class="fn-ag" id="fa1">Lead Gen</div>
+      <div class="fn-ag" id="fa2">Content</div>
+      <div class="fn-ag" id="fa3">SEO</div>
+      <div class="fn-ag" id="fa4">Dispatch</div>
+      <div class="fn-ag" id="fa5">Invoicing</div>
+      <div class="fn-ag" id="fa6">Payroll</div>
+      <div class="fn-ag" id="fa7">Security</div>
+      <div class="fn-ag" id="fa8">Compliance</div>
     </div>
   </div>
 </div>
 
 
-<!-- SCENE 5: DEPARTMENTS -->
-<div class="scene" id="s5">
-  <div class="s5top">
-    <h2>Every function. <em>One workforce.</em></h2>
-    <p>5 divisions · 35 agents · Zero overhead</p>
+<!-- SCENE 5: DEPT SHOWCASE -->
+<div class="scene" id="s5" style="padding:0;overflow:hidden;">
+<style>
+.dept-show{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(1.04);transition:opacity 0.5s,transform 0.5s;pointer-events:none;text-align:center;padding:60px;}
+.dept-show.ds-active{opacity:1;transform:scale(1);}
+.dept-show.ds-out{opacity:0;transform:scale(0.95);}
+.ds-icon{font-size:72px;margin-bottom:20px;}
+.ds-name{font-size:88px;font-weight:900;letter-spacing:-4px;line-height:1;}
+.ds-agents{display:flex;gap:14px;margin-top:24px;flex-wrap:wrap;justify-content:center;}
+.ds-chip{font-size:18px;font-weight:700;padding:11px 24px;border-radius:100px;border:1.5px solid;background:rgba(255,255,255,0.04);}
+.ds-num{font-size:14px;font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-top:20px;opacity:0.35;}
+</style>
+  <div class="dept-show" id="ds-intro">
+    <div style="font-size:13px;letter-spacing:6px;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:20px;">5 Divisions</div>
+    <div style="font-size:72px;font-weight:900;letter-spacing:-3px;color:#fff;line-height:1.0;">Every function.<br><span style="color:#22d3ee;">One platform.</span></div>
   </div>
-  <div class="dg">
-    <div class="dc" id="d1" style="background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.15);">
-      <div class="dl" style="color:#22d3ee;">Sales</div>
-      <div class="da">Lead Generation</div><div class="da">Lead Response</div>
-      <div class="da">Pipeline Tracker</div><div class="da">Proposals</div>
-      <div class="da">Account Renewal</div><div class="da">CRM Updates</div>
+  <div class="dept-show" id="ds-1" style="background:radial-gradient(ellipse at 50% 60%,rgba(34,211,238,0.08) 0%,transparent 65%);">
+    <div class="ds-icon">&#128200;</div>
+    <div class="ds-name" style="color:#22d3ee;">Sales</div>
+    <div class="ds-agents">
+      <div class="ds-chip" style="color:#22d3ee;border-color:rgba(34,211,238,0.3);">Lead Generation</div>
+      <div class="ds-chip" style="color:#22d3ee;border-color:rgba(34,211,238,0.3);">Pipeline</div>
+      <div class="ds-chip" style="color:#22d3ee;border-color:rgba(34,211,238,0.3);">Renewals</div>
     </div>
-    <div class="dc" id="d2" style="background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.15);">
-      <div class="dl" style="color:#a78bfa;">Marketing</div>
-      <div class="da">SEO Agent</div><div class="da">Content Agent</div>
-      <div class="da">Social Media</div><div class="da">Email Campaigns</div>
-      <div class="da">Ad Spend</div><div class="da">Brand Monitor</div>
+    <div class="ds-num">12 agents</div>
+  </div>
+  <div class="dept-show" id="ds-2" style="background:radial-gradient(ellipse at 50% 60%,rgba(167,139,250,0.08) 0%,transparent 65%);">
+    <div class="ds-icon">&#128227;</div>
+    <div class="ds-name" style="color:#a78bfa;">Marketing</div>
+    <div class="ds-agents">
+      <div class="ds-chip" style="color:#a78bfa;border-color:rgba(167,139,250,0.3);">SEO</div>
+      <div class="ds-chip" style="color:#a78bfa;border-color:rgba(167,139,250,0.3);">Content</div>
+      <div class="ds-chip" style="color:#a78bfa;border-color:rgba(167,139,250,0.3);">Social Media</div>
     </div>
-    <div class="dc" id="d3" style="background:rgba(96,165,250,0.05);border:1px solid rgba(96,165,250,0.15);">
-      <div class="dl" style="color:#60a5fa;">Operations</div>
-      <div class="da">Dispatch Agent</div><div class="da">Vendor Manager</div>
-      <div class="da">SLA Tracker</div><div class="da">Incident Response</div>
-      <div class="da">Scheduling</div><div class="da">Quality Control</div>
+    <div class="ds-num">8 agents</div>
+  </div>
+  <div class="dept-show" id="ds-3" style="background:radial-gradient(ellipse at 50% 60%,rgba(96,165,250,0.08) 0%,transparent 65%);">
+    <div class="ds-icon">&#9881;&#65039;</div>
+    <div class="ds-name" style="color:#60a5fa;">Operations</div>
+    <div class="ds-agents">
+      <div class="ds-chip" style="color:#60a5fa;border-color:rgba(96,165,250,0.3);">Dispatch</div>
+      <div class="ds-chip" style="color:#60a5fa;border-color:rgba(96,165,250,0.3);">Vendors</div>
+      <div class="ds-chip" style="color:#60a5fa;border-color:rgba(96,165,250,0.3);">SLA Tracker</div>
     </div>
-    <div class="dc" id="d4" style="background:rgba(52,211,153,0.05);border:1px solid rgba(52,211,153,0.15);">
-      <div class="dl" style="color:#34d399;">Finance</div>
-      <div class="da">Invoice Agent</div><div class="da">AR Collections</div>
-      <div class="da">Budget Monitor</div><div class="da">Payroll Prep</div>
-      <div class="da">Reporting</div><div class="da">Forecasting</div>
+    <div class="ds-num">10 agents</div>
+  </div>
+  <div class="dept-show" id="ds-4" style="background:radial-gradient(ellipse at 50% 60%,rgba(52,211,153,0.08) 0%,transparent 65%);">
+    <div class="ds-icon">&#128176;</div>
+    <div class="ds-name" style="color:#34d399;">Finance</div>
+    <div class="ds-agents">
+      <div class="ds-chip" style="color:#34d399;border-color:rgba(52,211,153,0.3);">Invoicing</div>
+      <div class="ds-chip" style="color:#34d399;border-color:rgba(52,211,153,0.3);">Budgets</div>
+      <div class="ds-chip" style="color:#34d399;border-color:rgba(52,211,153,0.3);">Payroll</div>
     </div>
-    <div class="dc" id="d5" style="background:rgba(129,140,248,0.05);border:1px solid rgba(129,140,248,0.15);">
-      <div class="dl" style="color:#818cf8;">Technology</div>
-      <div class="da">Infra Monitor</div><div class="da">Security Agent</div>
-      <div class="da">Help Desk</div><div class="da">Cloud Costs</div>
-      <div class="da">Dev Ops</div><div class="da">Access Control</div>
+    <div class="ds-num">8 agents</div>
+  </div>
+  <div class="dept-show" id="ds-5" style="background:radial-gradient(ellipse at 50% 60%,rgba(129,140,248,0.08) 0%,transparent 65%);">
+    <div class="ds-icon">&#128187;</div>
+    <div class="ds-name" style="color:#818cf8;">Technology</div>
+    <div class="ds-agents">
+      <div class="ds-chip" style="color:#818cf8;border-color:rgba(129,140,248,0.3);">Security</div>
+      <div class="ds-chip" style="color:#818cf8;border-color:rgba(129,140,248,0.3);">Infrastructure</div>
+      <div class="ds-chip" style="color:#818cf8;border-color:rgba(129,140,248,0.3);">Help Desk</div>
     </div>
+    <div class="ds-num">7 agents</div>
   </div>
 </div>
+
 
 <!-- SCENE 6: CHAT -->
 <div class="scene" id="s6">
@@ -433,13 +476,24 @@ const IDS = ['s1','s2','s3','s4','s5','s6','s7','s8'];
 let cur = 0, tmr = null, t0 = null;
 
 function animOrg() {
-  const h=document.getElementById("s4h");if(h){h.style.opacity="1";h.style.transform="translateY(0)";}
-  setTimeout(()=>{const e=document.getElementById("oc1");if(e){e.style.opacity="1";e.style.transform="translateY(0)";}},300);
-  setTimeout(()=>{const e=document.getElementById("oc-v1");if(e){e.style.opacity="1";}},800);
-  setTimeout(()=>{const e=document.getElementById("oc2");if(e){e.style.opacity="1";}},1000);
-  setTimeout(()=>{const e=document.getElementById("oc-v2");if(e){e.style.opacity="1";}},1600);
-  setTimeout(()=>{const e=document.getElementById("oc3");if(e){e.style.opacity="1";}},1900);
+  var fl=document.getElementById('fl'),ft=document.getElementById('ft');
+  if(fl)fl.style.opacity='1';
+  if(ft)ft.style.opacity='1';
+  setTimeout(function(){var e=document.getElementById('f-ceo');if(e)e.classList.add('show');},300);
+  setTimeout(function(){var e=document.getElementById('f-c1');if(e)e.style.opacity='1';},700);
+  setTimeout(function(){
+    ['fv1','fv2','fv3','fv4','fv5'].forEach(function(id,i){
+      setTimeout(function(){var e=document.getElementById(id);if(e)e.classList.add('show');},i*110);
+    });
+  },1000);
+  setTimeout(function(){var e=document.getElementById('f-c2');if(e)e.style.opacity='1';},1700);
+  setTimeout(function(){
+    ['fa1','fa2','fa3','fa4','fa5','fa6','fa7','fa8'].forEach(function(id,i){
+      setTimeout(function(){var e=document.getElementById(id);if(e)e.classList.add('show');},i*80);
+    });
+  },2000);
 }
+
 function _REPLACED_animOrg() {
   setTimeout(()=>{const c=document.querySelector("#os1 .on");if(c){c.style.opacity="1";c.style.transform="translateY(0)";}},200);
   setTimeout(()=>{const s=document.getElementById("os2");if(s){s.style.opacity="1";}setTimeout(()=>{s.querySelectorAll(".on").forEach((n)=>{n.style.opacity="1";n.style.transform="translateY(0)";});},200);},900);
@@ -466,12 +520,23 @@ function _OLD_animOrg_REPLACED() {
 }
 
 function animDepts() {
-  const h=document.getElementById("s5h");if(h){h.style.opacity="1";h.style.transform="translateY(0)";}
-  ["d1","d2","d3","d4","d5"].forEach((id,i)=>setTimeout(()=>{
-    const e=document.getElementById(id);
-    if(e){e.style.opacity="1";e.style.transform="translateY(0) scale(1)";}
-  },300+i*160));
+  var steps=['ds-intro','ds-1','ds-2','ds-3','ds-4','ds-5'];
+  var cur=0;
+  function next(){
+    if(cur>0){
+      var prev=document.getElementById(steps[cur-1]);
+      if(prev){prev.classList.remove('ds-active');prev.classList.add('ds-out');setTimeout(function(){prev.classList.remove('ds-out');},500);}
+    }
+    if(cur<steps.length){
+      var el=document.getElementById(steps[cur]);
+      if(el)el.classList.add('ds-active');
+      cur++;
+      if(cur<steps.length)setTimeout(next,1300);
+    }
+  }
+  next();
 }
+
 function _REPLACED_animDepts() {
   ["d1","d2","d3","d4","d5"].forEach((id,i)=>setTimeout(()=>{const e=document.getElementById(id);if(e)e.classList.add("popped");},300+i*180));
 }
@@ -504,17 +569,14 @@ function show(idx) {
 }
 
 function reset() {
-  document.querySelectorAll(".bub").forEach(n=>{n.style.opacity="0";n.style.transition="none";});
-  ["oc1","oc2","oc3","oc-v1","oc-v2","s4h","s5h"].forEach(id=>{
-    const e=document.getElementById(id);if(!e)return;
-    e.style.opacity="0";e.style.transition="none";
-    if(id==="oc1"||id==="s4h"||id==="s5h")e.style.transform="translateY(16px)";
-  });
-  ["d1","d2","d3","d4","d5"].forEach(id=>{
-    const e=document.getElementById(id);if(!e)return;
-    e.style.opacity="0";e.style.transform="translateY(28px) scale(0.94)";e.style.transition="none";
-  });
+  document.querySelectorAll('.bub').forEach(function(n){n.style.opacity='0';n.style.transition='none';});
+  document.querySelectorAll('.flow-node,.fn-vp,.fn-ag').forEach(function(n){n.classList.remove('show');n.style.transition='none';});
+  document.querySelectorAll('.flow-conn').forEach(function(n){n.style.opacity='0';n.style.transition='none';});
+  var fl=document.getElementById('fl'),ft=document.getElementById('ft');
+  if(fl){fl.style.opacity='0';}if(ft){ft.style.opacity='0';}
+  document.querySelectorAll('.dept-show').forEach(function(n){n.classList.remove('ds-active','ds-out');});
 }
+
 function _REPLACED_reset() {
   document.querySelectorAll(".on,.bub").forEach(n=>{n.style.opacity="0";n.style.transition="none";if(n.classList.contains("vp")||n.classList.contains("ceo"))n.style.transform="translateY(12px)";});
   document.querySelectorAll(".org-step").forEach(n=>{n.style.opacity="0";n.style.transition="none";});
