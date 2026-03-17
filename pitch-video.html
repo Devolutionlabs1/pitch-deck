@@ -7,191 +7,160 @@
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background: #0a0a0a; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow: hidden; width: 100vw; height: 100vh; }
-
-.scene {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  opacity: 0; transition: opacity 0.8s ease;
-  padding: 40px 60px;
-}
+.scene { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.8s ease; padding: 32px 50px; }
 .scene.active { opacity: 1; }
-
-.progress {
-  position: fixed; bottom: 0; left: 0;
-  height: 3px; background: #22d3ee;
-  width: 0%; transition: width 0.1s linear; z-index: 100;
-}
-
-/* Scene 1 */
+.progress { position: fixed; bottom: 0; left: 0; height: 3px; background: #22d3ee; width: 0%; transition: width 0.1s linear; z-index: 100; }
 #s1 { background: #0a0a0a; }
 #s1 .pre { font-size: 13px; letter-spacing: 5px; text-transform: uppercase; color: #22d3ee; margin-bottom: 28px; opacity: 0; transition: opacity 0.6s 0.3s; font-weight: 700; }
-#s1 h1 { font-size: 66px; font-weight: 900; color: #fff; text-align: center; line-height: 1.1; max-width: 1000px; opacity: 0; transition: opacity 0.6s 0.8s; }
+#s1 h1 { font-size: 64px; font-weight: 900; color: #fff; text-align: center; line-height: 1.1; max-width: 1000px; opacity: 0; transition: opacity 0.6s 0.8s; }
 #s1 h1 span { color: #22d3ee; }
 #s1.active .pre, #s1.active h1 { opacity: 1; }
-
-/* Scene 2 - Org Chart Full Company */
-#s2 { background: #0a0a0a; overflow: hidden; }
-#s2 .s2-title { font-size: 14px; letter-spacing: 5px; text-transform: uppercase; color: #22d3ee; margin-bottom: 24px; font-weight: 700; opacity: 0; transition: opacity 0.5s 0.2s; text-align: center; }
+#s2 { background: #0a0a0a; overflow: hidden; justify-content: flex-start; padding-top: 28px; }
+#s2 .s2-title { font-size: 12px; letter-spacing: 5px; text-transform: uppercase; color: #22d3ee; margin-bottom: 18px; font-weight: 700; opacity: 0; transition: opacity 0.5s 0.2s; text-align: center; width: 100%; }
 #s2.active .s2-title { opacity: 1; }
-.full-org { width: 100%; max-width: 1160px; }
-.org-level { display: flex; justify-content: center; gap: 10px; margin-bottom: 0; }
-.org-node { border-radius: 7px; padding: 8px 14px; font-size: 11px; font-weight: 700; white-space: nowrap; text-align: center; opacity: 0; transition: opacity 0.3s; }
-.node-ceo { background: rgba(34,211,238,0.15); border: 1.5px solid #22d3ee; color: #22d3ee; font-size: 14px; padding: 11px 28px; }
-.node-dept { background: rgba(139,92,246,0.15); border: 1.5px solid #8b5cf6; color: #a78bfa; font-size: 12px; padding: 9px 16px; }
-.node-agent { background: rgba(14,28,50,0.8); border: 1px solid #1e3a5f; color: #7ba8d4; font-size: 10px; padding: 6px 10px; }
-.vline { width: 2px; height: 18px; margin: 0 auto; }
-.vline-ceo { background: linear-gradient(#22d3ee88,#8b5cf688); }
-.vline-dept { background: linear-gradient(#8b5cf688,#1e3a5f88); }
+.full-org { width: 100%; max-width: 1260px; }
+.org-level { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+.org-node { border-radius: 6px; padding: 7px 12px; font-size: 10px; font-weight: 700; white-space: nowrap; opacity: 0; transition: opacity 0.25s; }
+.node-ceo { background: rgba(34,211,238,0.15); border: 1.5px solid #22d3ee; color: #22d3ee; font-size: 14px; padding: 11px 28px; border-radius: 10px; white-space: nowrap; }
+.node-dept { background: rgba(139,92,246,0.12); border: 1px solid #7c3aed; color: #a78bfa; font-size: 9px; padding: 6px 10px; border-radius: 6px; }
+.node-agent { background: rgba(14,28,50,0.8); border: 1px solid #1e3a5f; color: #7ba8d4; font-size: 9px; padding: 5px 8px; }
+.vline { width: 2px; margin: 0 auto; }
 .hline { height: 2px; margin: 0 auto; }
-
-/* Scene 3 - 40 Agents Grid */
-#s3 { background: #0a0a0a; padding: 32px 50px; }
-#s3 .s3-title { font-size: 13px; letter-spacing: 5px; text-transform: uppercase; color: #22d3ee; margin-bottom: 8px; font-weight: 700; opacity: 0; transition: opacity 0.5s 0.2s; }
-#s3 h2 { font-size: 48px; font-weight: 900; color: #fff; margin-bottom: 24px; opacity: 0; transition: opacity 0.5s 0.5s; }
-#s3 h2 span { color: #22d3ee; }
-#s3.active .s3-title, #s3.active h2 { opacity: 1; }
-.agents-grid { display: grid; grid-template-columns: repeat(8,1fr); gap: 8px; width: 100%; }
-.ag { background: #0d0d0d; border: 1px solid #141414; border-radius: 8px; padding: 10px 8px; opacity: 0; transition: opacity 0.25s; }
-.ag .dept-tag { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
-.ag .agent-name { font-size: 10px; font-weight: 700; color: #ddd; line-height: 1.3; }
-
-/* Scene 4 - Chat */
+#s3 { background: #0a0a0a; padding: 24px 40px; justify-content: flex-start; }
+#s3 .s3-head { text-align: center; opacity: 0; transition: opacity 0.5s 0.3s; margin-bottom: 20px; width: 100%; }
+#s3 .s3-head h2 { font-size: 42px; font-weight: 900; color: #fff; }
+#s3 .s3-head h2 span { color: #22d3ee; }
+#s3 .s3-head p { font-size: 14px; color: #555; letter-spacing: 3px; text-transform: uppercase; margin-top: 4px; }
+#s3.active .s3-head { opacity: 1; }
+.agents-grid { display: grid; grid-template-columns: repeat(12,1fr); gap: 5px; width: 100%; }
+.ag { background: #0d0d0d; border: 1px solid #141414; border-radius: 6px; padding: 7px 6px; opacity: 0; transition: opacity 0.2s; }
+.ag .dept-tag { font-size: 7px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ag .agent-name { font-size: 9px; font-weight: 700; color: #ddd; line-height: 1.3; }
 #s4 { background: #0a0a0a; }
-#s4 h2 { font-size: 46px; font-weight: 900; color: #fff; margin-bottom: 28px; opacity: 0; transition: opacity 0.5s 0.3s; }
+#s4 h2 { font-size: 46px; font-weight: 900; color: #fff; margin-bottom: 28px; opacity: 0; transition: opacity 0.5s 0.3s; text-align: center; }
 #s4 h2 span { color: #22d3ee; }
-.chat-window { background: #060e1a; border: 1.5px solid #22d3ee; border-radius: 12px; padding: 28px; max-width: 700px; width: 100%; box-shadow: 0 0 40px rgba(34,211,238,0.1); opacity: 0; transition: opacity 0.6s 0.8s; }
+.chat-window { background: #060e1a; border: 1.5px solid #22d3ee; border-radius: 12px; padding: 28px; max-width: 720px; width: 100%; box-shadow: 0 0 40px rgba(34,211,238,0.1); opacity: 0; transition: opacity 0.6s 0.8s; }
 .chat-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #22d3ee; margin-bottom: 20px; font-weight: 700; }
-.bubble { border-radius: 10px; padding: 12px 16px; margin-bottom: 10px; max-width: 90%; transition: opacity 0.4s; }
-.bubble.user { background: rgba(34,211,238,0.12); border: 1px solid rgba(34,211,238,0.3); color: #fff; font-size: 14px; margin-left: auto; }
-.bubble.system { background: rgba(30,58,95,0.4); border: 1px solid #1e3a5f; color: #94a3b8; font-size: 14px; }
+.bubble { border-radius: 10px; padding: 12px 16px; margin-bottom: 10px; max-width: 90%; transition: opacity 0.4s; font-size: 14px; }
+.bubble.user { background: rgba(34,211,238,0.12); border: 1px solid rgba(34,211,238,0.3); color: #fff; margin-left: auto; }
+.bubble.system { background: rgba(30,58,95,0.4); border: 1px solid #1e3a5f; color: #94a3b8; }
 .bubble span { color: #22d3ee; font-weight: 700; }
 #s4.active h2, #s4.active .chat-window { opacity: 1; }
-
-/* Scene 5 - Counter */
 #s5 { background: #0a0a0a; }
 #s5 .cw { text-align: center; opacity: 0; transition: opacity 0.6s 0.3s; }
 #s5 .counter { font-size: 130px; font-weight: 900; color: #22d3ee; line-height: 1; letter-spacing: -6px; }
-#s5 .clabel { font-size: 22px; color: #777; text-transform: uppercase; letter-spacing: 3px; margin-top: 16px; }
-#s5 .csub { font-size: 15px; color: #333; margin-top: 8px; }
-#s5 .csub2 { font-size: 14px; color: #22d3ee; margin-top: 24px; letter-spacing: 2px; opacity: 0; transition: opacity 0.5s 2.5s; }
+#s5 .clabel { font-size: 20px; color: #666; text-transform: uppercase; letter-spacing: 3px; margin-top: 16px; }
+#s5 .csub { font-size: 14px; color: #333; margin-top: 8px; }
+#s5 .csub2 { font-size: 14px; color: #22d3ee; margin-top: 24px; letter-spacing: 2px; opacity: 0; transition: opacity 0.5s 2.5s; font-weight: 700; }
 #s5.active .cw { opacity: 1; }
 #s5.active .csub2 { opacity: 1; }
-
-/* Scene 6 */
 #s6 { background: radial-gradient(ellipse at 50% 30%, #071522 0%, #0a0a0a 65%); }
 #s6 .dl-logo { font-size: 80px; font-weight: 900; color: #22d3ee; letter-spacing: -3px; margin-bottom: 16px; opacity: 0; transition: opacity 0.8s 0.3s; }
 #s6 .dl-url { font-size: 26px; color: #fff; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 12px; opacity: 0; transition: opacity 0.8s 0.8s; }
 #s6 .dl-cta { font-size: 18px; color: #444; letter-spacing: 2px; opacity: 0; transition: opacity 0.8s 1.2s; }
 #s6 .dl-tag { font-size: 12px; letter-spacing: 6px; text-transform: uppercase; color: #22d3ee; margin-top: 40px; opacity: 0; transition: opacity 0.8s 1.6s; font-weight: 700; }
 #s6.active .dl-logo, #s6.active .dl-url, #s6.active .dl-cta, #s6.active .dl-tag { opacity: 1; }
-
-.replay-btn {
-  position: fixed; bottom: 20px; right: 20px;
-  background: rgba(34,211,238,0.1); border: 1px solid #22d3ee;
-  color: #22d3ee; padding: 10px 24px; border-radius: 100px;
-  font-size: 12px; font-weight: 700; letter-spacing: 2px;
-  text-transform: uppercase; cursor: pointer; opacity: 0;
-  transition: opacity 0.5s; z-index: 200; font-family: Arial;
-}
+.replay-btn { position: fixed; bottom: 20px; right: 20px; background: rgba(34,211,238,0.1); border: 1px solid #22d3ee; color: #22d3ee; padding: 10px 24px; border-radius: 100px; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; opacity: 0; transition: opacity 0.5s; z-index: 200; font-family: Arial; }
 .replay-btn.visible { opacity: 1; }
 </style>
 </head>
 <body>
 
-<!-- SCENE 1: HOOK -->
 <div class="scene" id="s1">
   <div class="pre">Devolution Lab</div>
   <h1>Most companies still hire people<br>to do work <span>AI can own.</span></h1>
 </div>
 
-<!-- SCENE 2: FULL ORG CHART - 40 AGENTS -->
 <div class="scene" id="s2">
-  <div class="s2-title">A complete AI company — 40 agents, 5 departments, one hierarchy</div>
+  <div class="s2-title">120 agents across 10 departments — one AI company running inside yours</div>
   <div class="full-org">
-    <!-- Level 1: CEO -->
     <div class="org-level" id="org-l1">
       <div class="org-node node-ceo">⬡ AI Operations Executive</div>
     </div>
-    <div class="vline vline-ceo" style="height:22px;" id="org-v1"></div>
-    <div class="hline" style="width:900px;background:linear-gradient(to right,#8b5cf622,#8b5cf688,#8b5cf622);" id="org-h1"></div>
+    <div class="vline" style="height:18px;background:linear-gradient(#22d3ee88,#7c3aed88);" id="org-v1"></div>
+    <div class="hline" style="width:100%;background:linear-gradient(to right,#7c3aed22,#7c3aed88,#7c3aed22);max-width:1200px;" id="org-h1"></div>
+    <div class="org-level" id="org-l2">
+      <div class="org-node node-dept" style="min-width:90px;font-size:10px;">◈ Sales and Revenue</div>
+      <div class="org-node node-dept" style="min-width:90px;font-size:10px;">◈ Marketing</div>
+      <div class="org-node node-dept" style="min-width:90px;font-size:10px;">◈ Operations</div>
+      <div class="org-node node-dept" style="min-width:90px;font-size:10px;">◈ Finance</div>
+      <div class="org-node node-dept" style="min-width:90px;font-size:10px;">◈ Human Resources</div>
+      <div class="org-node node-dept" style="min-width:90px;font-size:10px;">◈ Legal and Compliance</div>
+      <div class="org-node node-dept" style="min-width:90px;font-size:10px;">◈ Technology and IT</div>
+      <div class="org-node node-dept" style="min-width:90px;font-size:10px;">◈ Customer Success</div>
+      <div class="org-node node-dept" style="min-width:90px;font-size:10px;">◈ Supply Chain</div>
+      <div class="org-node node-dept" style="min-width:90px;font-size:10px;">◈ Strategy and Analytics</div>
 
-    <!-- Level 2: Departments -->
-    <div class="org-level" style="gap:14px;" id="org-l2">
-      <div class="org-node node-dept" style="min-width:150px;">◈ Sales and Growth</div>
-      <div class="org-node node-dept" style="min-width:150px;">◈ Marketing</div>
-      <div class="org-node node-dept" style="min-width:150px;">◈ Operations</div>
-      <div class="org-node node-dept" style="min-width:150px;">◈ Finance</div>
-      <div class="org-node node-dept" style="min-width:150px;">◈ Compliance</div>
     </div>
-    <div class="vline" style="height:18px;background:linear-gradient(#8b5cf688,#1e3a5f88);" id="org-v2"></div>
-    <div class="hline" style="width:1100px;background:linear-gradient(to right,#1e3a5f33,#1e3a5f88,#1e3a5f33);" id="org-h2"></div>
-
-    <!-- Level 3: Agents row 1 (20 agents) -->
-    <div class="org-level" style="gap:6px;flex-wrap:wrap;max-width:1160px;justify-content:center;" id="org-l3a">
-      <div class="org-node node-agent">Lead Gen</div>
+    <div class="vline" style="height:14px;background:linear-gradient(#7c3aed88,#1e3a5f88);" id="org-v2"></div>
+    <div class="hline" style="width:100%;background:linear-gradient(to right,#1e3a5f22,#1e3a5f88,#1e3a5f22);max-width:1200px;" id="org-h2"></div>
+    <div class="org-level" style="gap:4px;max-width:1240px;" id="org-l3a">
+      <div class="org-node node-agent">Lead Generation</div>
       <div class="org-node node-agent">Lead Response</div>
       <div class="org-node node-agent">Pipeline Tracker</div>
       <div class="org-node node-agent">Demo Scheduler</div>
-      <div class="org-node node-agent">CRM Updater</div>
-      <div class="org-node node-agent">Win/Loss Analyst</div>
-      <div class="org-node node-agent">Proposal Agent</div>
-      <div class="org-node node-agent">Account Renewal</div>
       <div class="org-node node-agent">Content Agent</div>
       <div class="org-node node-agent">SEO Agent</div>
       <div class="org-node node-agent">Social Media</div>
       <div class="org-node node-agent">Email Campaigns</div>
-      <div class="org-node node-agent">Ad Spend Optimizer</div>
-      <div class="org-node node-agent">Reputation Agent</div>
-      <div class="org-node node-agent">Event Scheduler</div>
-      <div class="org-node node-agent">Brand Monitor</div>
       <div class="org-node node-agent">Dispatch Agent</div>
       <div class="org-node node-agent">Exception Handler</div>
       <div class="org-node node-agent">Vendor Manager</div>
       <div class="org-node node-agent">SLA Tracker</div>
-    </div>
-
-    <!-- Level 3: Agents row 2 (20 agents) -->
-    <div class="org-level" style="gap:6px;flex-wrap:wrap;max-width:1160px;justify-content:center;margin-top:6px;" id="org-l3b">
-      <div class="org-node node-agent">Scheduling Agent</div>
-      <div class="org-node node-agent">Quality Control</div>
-      <div class="org-node node-agent">Incident Response</div>
-      <div class="org-node node-agent">Maintenance Track</div>
       <div class="org-node node-agent">Invoice Agent</div>
       <div class="org-node node-agent">Billing Tracker</div>
       <div class="org-node node-agent">AR Collections</div>
       <div class="org-node node-agent">Budget Monitor</div>
-      <div class="org-node node-agent">Payroll Prep</div>
-      <div class="org-node node-agent">Expense Tracker</div>
-      <div class="org-node node-agent">Financial Reports</div>
-      <div class="org-node node-agent">Tax Document Agent</div>
-      <div class="org-node node-agent">Regulatory Monitor</div>
-      <div class="org-node node-agent">Audit Trail Agent</div>
-      <div class="org-node node-agent">Policy Updater</div>
-      <div class="org-node node-agent">Risk Flagging Agent</div>
-      <div class="org-node node-agent">Cert Tracker</div>
-      <div class="org-node node-agent">Retention Agent</div>
+      <div class="org-node node-agent">Recruitment Agent</div>
       <div class="org-node node-agent">Onboarding Agent</div>
-      <div class="org-node node-agent">Referral Agent</div>
+      <div class="org-node node-agent">Benefits Admin</div>
+      <div class="org-node node-agent">Performance Track</div>
+
+    </div>
+    <div class="org-level" style="gap:4px;max-width:1240px;margin-top:4px;" id="org-l3b">
+      <div class="org-node node-agent">Regulatory Monitor</div>
+      <div class="org-node node-agent">Audit Trail</div>
+      <div class="org-node node-agent">Risk Flagging</div>
+      <div class="org-node node-agent">Contract Review</div>
+      <div class="org-node node-agent">Infrastructure Monitor</div>
+      <div class="org-node node-agent">Security Agent</div>
+      <div class="org-node node-agent">Incident Mgmt</div>
+      <div class="org-node node-agent">Patch Management</div>
+      <div class="org-node node-agent">Onboarding Agent</div>
+      <div class="org-node node-agent">Health Score Monitor</div>
+      <div class="org-node node-agent">Renewal Agent</div>
+      <div class="org-node node-agent">Support Escalation</div>
+      <div class="org-node node-agent">Supplier Monitor</div>
+      <div class="org-node node-agent">Demand Forecasting</div>
+      <div class="org-node node-agent">Inventory Agent</div>
+      <div class="org-node node-agent">Order Management</div>
+      <div class="org-node node-agent">Competitive Intel</div>
+      <div class="org-node node-agent">Market Analyst</div>
+      <div class="org-node node-agent">KPI Dashboard</div>
+      <div class="org-node node-agent">Board Reporting</div>
+
     </div>
   </div>
 </div>
 
-<!-- SCENE 3: 40 AGENTS BREAKDOWN -->
 <div class="scene" id="s3">
-  <div class="s3-title">The Full Workforce</div>
-  <h2><span>40 agents.</span> 5 departments. Running 24/7.</h2>
+  <div class="s3-head">
+    <h2><span>120 agents.</span> 10 departments. One AI company.</h2>
+    <p>Every Fortune 500 function — automated and running 24/7</p>
+  </div>
   <div class="agents-grid">
-    <!-- Sales (8) -->
-    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">Lead Generation</div></div>
-    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">Lead Response</div></div>
-    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">Pipeline Tracker</div></div>
-    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">Demo Scheduler</div></div>
-    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">Proposal Agent</div></div>
-    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">CRM Updater</div></div>
-    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">Win/Loss Analyst</div></div>
-    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales</div><div class="agent-name">Account Renewal</div></div>
-    <!-- Marketing (8) -->
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales and Revenue</div><div class="agent-name">Lead Generation</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales and Revenue</div><div class="agent-name">Lead Response</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales and Revenue</div><div class="agent-name">Pipeline Tracker</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales and Revenue</div><div class="agent-name">Demo Scheduler</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales and Revenue</div><div class="agent-name">Proposal Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales and Revenue</div><div class="agent-name">CRM Updater</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales and Revenue</div><div class="agent-name">Win/Loss Analyst</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales and Revenue</div><div class="agent-name">Account Renewal</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales and Revenue</div><div class="agent-name">Upsell Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales and Revenue</div><div class="agent-name">Contract Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales and Revenue</div><div class="agent-name">Sales Forecasting</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#22d3ee;">Sales and Revenue</div><div class="agent-name">Territory Agent</div></div>
     <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Content Agent</div></div>
     <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">SEO Agent</div></div>
     <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Social Media</div></div>
@@ -200,7 +169,10 @@ body { background: #0a0a0a; font-family: 'Helvetica Neue', Helvetica, Arial, san
     <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Reputation Agent</div></div>
     <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Event Scheduler</div></div>
     <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Brand Monitor</div></div>
-    <!-- Operations (8) -->
+    <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">PR Outreach</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Campaign Analytics</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Influencer Coord.</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#a78bfa;">Marketing</div><div class="agent-name">Market Research</div></div>
     <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Dispatch Agent</div></div>
     <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Exception Handler</div></div>
     <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Vendor Manager</div></div>
@@ -209,7 +181,10 @@ body { background: #0a0a0a; font-family: 'Helvetica Neue', Helvetica, Arial, san
     <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Quality Control</div></div>
     <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Incident Response</div></div>
     <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Maintenance Track</div></div>
-    <!-- Finance (8) -->
+    <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Logistics Coord.</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Inventory Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Procurement Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#60a5fa;">Operations</div><div class="agent-name">Facility Agent</div></div>
     <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Invoice Agent</div></div>
     <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Billing Tracker</div></div>
     <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">AR Collections</div></div>
@@ -218,41 +193,106 @@ body { background: #0a0a0a; font-family: 'Helvetica Neue', Helvetica, Arial, san
     <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Expense Tracker</div></div>
     <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Financial Reports</div></div>
     <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Tax Document</div></div>
-    <!-- Compliance (8) -->
-    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Regulatory Monitor</div></div>
-    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Audit Trail</div></div>
-    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Policy Updater</div></div>
-    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Risk Flagging</div></div>
-    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Cert Tracker</div></div>
-    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Retention Agent</div></div>
-    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Onboarding Agent</div></div>
-    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Compliance</div><div class="agent-name">Referral Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Audit Prep</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Treasury Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Cost Analysis</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#34d399;">Finance</div><div class="agent-name">Forecasting Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#f87171;">Human Resources</div><div class="agent-name">Recruitment Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#f87171;">Human Resources</div><div class="agent-name">Onboarding Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#f87171;">Human Resources</div><div class="agent-name">Benefits Admin</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#f87171;">Human Resources</div><div class="agent-name">Performance Track</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#f87171;">Human Resources</div><div class="agent-name">Training Coord.</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#f87171;">Human Resources</div><div class="agent-name">Offboarding Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#f87171;">Human Resources</div><div class="agent-name">Policy Updater</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#f87171;">Human Resources</div><div class="agent-name">Workforce Planning</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#f87171;">Human Resources</div><div class="agent-name">Engagement Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#f87171;">Human Resources</div><div class="agent-name">Diversity Tracker</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#f87171;">Human Resources</div><div class="agent-name">Comp and Benefits</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#f87171;">Human Resources</div><div class="agent-name">HR Reporting</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Legal and Compliance</div><div class="agent-name">Regulatory Monitor</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Legal and Compliance</div><div class="agent-name">Audit Trail</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Legal and Compliance</div><div class="agent-name">Risk Flagging</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Legal and Compliance</div><div class="agent-name">Contract Review</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Legal and Compliance</div><div class="agent-name">IP Tracker</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Legal and Compliance</div><div class="agent-name">Privacy Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Legal and Compliance</div><div class="agent-name">Litigation Monitor</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Legal and Compliance</div><div class="agent-name">Licensing Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Legal and Compliance</div><div class="agent-name">Policy Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Legal and Compliance</div><div class="agent-name">Ethics Monitor</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Legal and Compliance</div><div class="agent-name">Cert Tracker</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fbbf24;">Legal and Compliance</div><div class="agent-name">Disclosure Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#818cf8;">Technology and IT</div><div class="agent-name">Infrastructure Monitor</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#818cf8;">Technology and IT</div><div class="agent-name">Security Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#818cf8;">Technology and IT</div><div class="agent-name">Incident Mgmt</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#818cf8;">Technology and IT</div><div class="agent-name">Patch Management</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#818cf8;">Technology and IT</div><div class="agent-name">Help Desk Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#818cf8;">Technology and IT</div><div class="agent-name">Access Control</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#818cf8;">Technology and IT</div><div class="agent-name">Backup Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#818cf8;">Technology and IT</div><div class="agent-name">Cloud Cost Optimizer</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#818cf8;">Technology and IT</div><div class="agent-name">Dev Ops Monitor</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#818cf8;">Technology and IT</div><div class="agent-name">Data Quality Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#818cf8;">Technology and IT</div><div class="agent-name">Integration Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#818cf8;">Technology and IT</div><div class="agent-name">Uptime Monitor</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#2dd4bf;">Customer Success</div><div class="agent-name">Onboarding Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#2dd4bf;">Customer Success</div><div class="agent-name">Health Score Monitor</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#2dd4bf;">Customer Success</div><div class="agent-name">Renewal Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#2dd4bf;">Customer Success</div><div class="agent-name">Support Escalation</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#2dd4bf;">Customer Success</div><div class="agent-name">NPS Tracker</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#2dd4bf;">Customer Success</div><div class="agent-name">Churn Predictor</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#2dd4bf;">Customer Success</div><div class="agent-name">Feature Adoption</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#2dd4bf;">Customer Success</div><div class="agent-name">Feedback Collector</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#2dd4bf;">Customer Success</div><div class="agent-name">Success Reporting</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#2dd4bf;">Customer Success</div><div class="agent-name">Referral Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#2dd4bf;">Customer Success</div><div class="agent-name">Community Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#2dd4bf;">Customer Success</div><div class="agent-name">Training Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fb923c;">Supply Chain</div><div class="agent-name">Supplier Monitor</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fb923c;">Supply Chain</div><div class="agent-name">Demand Forecasting</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fb923c;">Supply Chain</div><div class="agent-name">Inventory Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fb923c;">Supply Chain</div><div class="agent-name">Order Management</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fb923c;">Supply Chain</div><div class="agent-name">Shipping Tracker</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fb923c;">Supply Chain</div><div class="agent-name">Returns Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fb923c;">Supply Chain</div><div class="agent-name">Customs Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fb923c;">Supply Chain</div><div class="agent-name">Warehouse Coord.</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fb923c;">Supply Chain</div><div class="agent-name">Quality Inspector</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fb923c;">Supply Chain</div><div class="agent-name">Risk Monitor</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fb923c;">Supply Chain</div><div class="agent-name">Lead Time Tracker</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#fb923c;">Supply Chain</div><div class="agent-name">Cost Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#e879f9;">Strategy and Analytics</div><div class="agent-name">Competitive Intel</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#e879f9;">Strategy and Analytics</div><div class="agent-name">Market Analyst</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#e879f9;">Strategy and Analytics</div><div class="agent-name">KPI Dashboard</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#e879f9;">Strategy and Analytics</div><div class="agent-name">Board Reporting</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#e879f9;">Strategy and Analytics</div><div class="agent-name">M and A Monitor</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#e879f9;">Strategy and Analytics</div><div class="agent-name">Risk Assessment</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#e879f9;">Strategy and Analytics</div><div class="agent-name">Innovation Scout</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#e879f9;">Strategy and Analytics</div><div class="agent-name">Benchmark Agent</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#e879f9;">Strategy and Analytics</div><div class="agent-name">Data Governance</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#e879f9;">Strategy and Analytics</div><div class="agent-name">Executive Briefing</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#e879f9;">Strategy and Analytics</div><div class="agent-name">OKR Tracker</div></div>
+    <div class="ag"><div class="dept-tag" style="color:#e879f9;">Strategy and Analytics</div><div class="agent-name">Scenario Agent</div></div>
+
   </div>
 </div>
 
-<!-- SCENE 4: CHAT -->
 <div class="scene" id="s4">
   <h2>Managing it is a <span>conversation.</span></h2>
   <div class="chat-window">
-    <div class="chat-label">Devolution Lab — Live AI Workforce (40 Agents Active)</div>
-    <div class="bubble user" id="q1" style="opacity:0;">How many leads came in this week?</div>
-    <div class="bubble system" id="a1" style="opacity:0;"><span>47</span> inbound leads. <span>12</span> qualified and routed to sales. <span>6</span> deals in progress. Proposal Agent has drafted 3 proposals automatically.</div>
-    <div class="bubble user" id="q2" style="opacity:0;">What needs my attention today across all departments?</div>
-    <div class="bubble system" id="a2" style="opacity:0;"><span>3 items flagged:</span> Apex vendor missed SLA — escalation sent. Q2 forecast 14% above plan — board summary ready. Compliance cert expires in 14 days — renewal initiated.</div>
+    <div class="chat-label">Devolution Lab — Live AI Workforce (120 Agents Active)</div>
+    <div class="bubble user" id="q1" style="opacity:0;">How many leads came in this week and what needs my attention?</div>
+    <div class="bubble system" id="a1" style="opacity:0;"><span>47 inbound leads</span> this week. <span>12 qualified.</span> 3 proposals auto-drafted. <span>2 items flagged:</span> Apex vendor missed SLA — escalation sent. Compliance cert expires in 14 days — renewal initiated.</div>
+    <div class="bubble user" id="q2" style="opacity:0;">Give me a financial summary across all departments.</div>
+    <div class="bubble system" id="a2" style="opacity:0;">Q2 revenue forecast is <span>14% above plan.</span> Outstanding AR: <span>$2.3M</span> — 6 accounts flagged. Budget burn rate on track. Board summary ready for review.</div>
   </div>
 </div>
 
-<!-- SCENE 5: COUNTER -->
 <div class="scene" id="s5">
   <div class="cw">
     <div class="counter" id="counter">$0</div>
     <div class="clabel">Annual savings potential at full scale</div>
-    <div class="csub">Based on Fortune 500 enterprise deployments</div>
-    <div class="csub2">40 agents. 5 departments. Zero coordination overhead.</div>
+    <div class="csub">Fortune 500 enterprise deployment — all 10 departments</div>
+    <div class="csub2">120 agents. 10 departments. Zero coordination overhead.</div>
   </div>
 </div>
 
-<!-- SCENE 6: CLOSE -->
 <div class="scene" id="s6">
   <div class="dl-logo">Devolution Lab</div>
   <div class="dl-url">devolutionlab.com</div>
@@ -264,99 +304,87 @@ body { background: #0a0a0a; font-family: 'Helvetica Neue', Helvetica, Arial, san
 <button class="replay-btn" id="replayBtn" onclick="startAnimation()">Replay</button>
 
 <script>
-const SCENE_DURATION = 7000;
-const TOTAL = 6;
+const SCENE_DURATION = 8000;
+const TOTAL_SCENES = 6;
 let currentScene = 0;
 let timer = null;
 let startTime = null;
 
-const scenes = ['s1','s2','s3','s4','s5','s6'];
-
 function animateOrgChart() {
-  const delay = 300;
-  const nodeGroups = [
-    ['org-l1'],
-    ['org-v1','org-h1'],
-    ['org-l2'],
-    ['org-v2','org-h2'],
-    ['org-l3a'],
-    ['org-l3b'],
+  const groups = [
+    [document.getElementById('org-l1')],
+    [document.getElementById('org-v1'), document.getElementById('org-h1')],
+    [document.getElementById('org-l2')],
+    [document.getElementById('org-v2'), document.getElementById('org-h2')],
+    [document.getElementById('org-l3a')],
+    [document.getElementById('org-l3b')],
   ];
-  nodeGroups.forEach((group, gi) => {
+  groups.forEach((group, gi) => {
     setTimeout(() => {
-      group.forEach(id => {
-        const el = document.getElementById(id);
+      group.forEach(el => {
         if (!el) return;
-        if (el.classList.contains('org-level')) {
+        if (el.classList && el.classList.contains('org-level')) {
           [...el.querySelectorAll('.org-node')].forEach((n,ni) => {
-            setTimeout(() => { n.style.opacity='1'; n.style.transition='opacity 0.3s'; }, ni*50);
+            setTimeout(() => { n.style.opacity='1'; n.style.transition='opacity 0.25s'; }, ni*30);
           });
         } else {
-          el.style.opacity='1';
-          el.style.transition='opacity 0.3s';
+          el.style.opacity = '1';
+          el.style.transition = 'opacity 0.3s';
         }
       });
-    }, delay + gi * 400);
+    }, 200 + gi * 350);
   });
 }
 
-function animateAgentCards() {
+function animateAgentGrid() {
   const cards = document.querySelectorAll('.ag');
   cards.forEach((c,i) => {
-    setTimeout(() => {
-      c.style.opacity='1';
-      c.style.transition='opacity 0.2s';
-    }, 600 + i * 55);
+    setTimeout(() => { c.style.opacity='1'; c.style.transition='opacity 0.15s'; }, 400 + i * 18);
   });
-}
-
-function resetOrgChart() {
-  document.querySelectorAll('.org-node').forEach(n => { n.style.opacity='0'; n.style.transition='none'; });
-  ['org-v1','org-h1','org-v2','org-h2'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el){ el.style.opacity='0'; el.style.transition='none'; }
-  });
-}
-
-function resetCards() {
-  document.querySelectorAll('.ag').forEach(c => { c.style.opacity='0'; c.style.transition='none'; });
 }
 
 function showScene(idx) {
-  scenes.forEach((id, i) => {
+  ['s1','s2','s3','s4','s5','s6'].forEach((id,i) => {
     document.getElementById(id).classList.toggle('active', i === idx);
   });
-
   if (idx === 1) animateOrgChart();
-  if (idx === 2) animateAgentCards();
-
+  if (idx === 2) animateAgentGrid();
   if (idx === 3) {
     ['q1','a1','q2','a2'].forEach((id,i) => {
       setTimeout(() => {
         const el = document.getElementById(id);
         el.style.opacity='1'; el.style.transition='opacity 0.4s';
-      }, 600 + i*1100);
+      }, 600 + i * 1200);
     });
   }
-
   if (idx === 4) {
-    let start = 0;
     const target = 1000000000;
-    const duration = 4000;
+    const duration = 4500;
     const startTs = performance.now();
-    function updateCounter(ts) {
-      const elapsed = ts - startTs;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const value = Math.floor(eased * target);
-      const fmt = value >= 1000000000 ? '$1B+' :
-        value >= 1000000 ? '$' + (value/1000000).toFixed(0) + 'M' :
-        value >= 1000 ? '$' + (value/1000).toFixed(0) + 'K' : '$' + value;
-      document.getElementById('counter').textContent = fmt;
-      if (progress < 1) requestAnimationFrame(updateCounter);
+    function tick(ts) {
+      const p = Math.min((ts - startTs) / duration, 1);
+      const e = 1 - Math.pow(1-p, 3);
+      const v = Math.floor(e * target);
+      document.getElementById('counter').textContent =
+        v >= 1e9 ? '$1B+' : v >= 1e6 ? '$' + (v/1e6).toFixed(0) + 'M' :
+        v >= 1e3 ? '$' + (v/1e3).toFixed(0) + 'K' : '$' + v;
+      if (p < 1) requestAnimationFrame(tick);
     }
-    setTimeout(() => requestAnimationFrame(updateCounter), 400);
+    setTimeout(() => requestAnimationFrame(tick), 400);
   }
+}
+
+function resetAll() {
+  document.querySelectorAll('.org-node').forEach(n => { n.style.opacity='0'; n.style.transition='none'; });
+  ['org-v1','org-h1','org-v2','org-h2'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) { el.style.opacity='0'; el.style.transition='none'; }
+  });
+  document.querySelectorAll('.ag').forEach(c => { c.style.opacity='0'; c.style.transition='none'; });
+  ['q1','a1','q2','a2'].forEach(id => {
+    const el = document.getElementById(id);
+    el.style.opacity='0'; el.style.transition='none';
+  });
 }
 
 function startAnimation() {
@@ -365,35 +393,25 @@ function startAnimation() {
   startTime = Date.now();
   document.getElementById('replayBtn').classList.remove('visible');
   document.getElementById('progress').style.width = '0%';
-
-  ['q1','a1','q2','a2'].forEach(id => {
-    const el = document.getElementById(id);
-    el.style.opacity='0'; el.style.transition='none';
-  });
-  resetOrgChart();
-  resetCards();
-
+  resetAll();
   showScene(0);
-
   timer = setInterval(() => {
     currentScene++;
-    if (currentScene >= TOTAL) {
+    if (currentScene >= TOTAL_SCENES) {
       clearInterval(timer);
       document.getElementById('replayBtn').classList.add('visible');
       return;
     }
     showScene(currentScene);
   }, SCENE_DURATION);
-
   const progressBar = document.getElementById('progress');
-  const totalDuration = SCENE_DURATION * TOTAL;
-  function updateProgress() {
-    const elapsed = Date.now() - startTime;
-    const pct = Math.min((elapsed / totalDuration) * 100, 100);
+  const totalMs = SCENE_DURATION * TOTAL_SCENES;
+  function upd() {
+    const pct = Math.min(((Date.now() - startTime) / totalMs) * 100, 100);
     progressBar.style.width = pct + '%';
-    if (pct < 100) requestAnimationFrame(updateProgress);
+    if (pct < 100) requestAnimationFrame(upd);
   }
-  requestAnimationFrame(updateProgress);
+  requestAnimationFrame(upd);
 }
 
 window.addEventListener('load', () => setTimeout(startAnimation, 600));
