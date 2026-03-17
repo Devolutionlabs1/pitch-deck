@@ -5,432 +5,280 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Devolution Lab</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
 
 body {
-  background: #F7F6F1;
-  font-family: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+  background: #F5F4EE;
+  font-family: 'Inter', -apple-system, sans-serif;
   overflow: hidden;
-  width: 100vw;
-  height: 100vh;
-  color: #1A1A1A;
+  width: 100vw; height: 100vh;
+  cursor: none;
 }
 
-/* Studio floor effect */
+/* Studio floor */
 body::after {
   content: '';
   position: fixed;
   bottom: 0; left: 0; right: 0;
-  height: 22%;
-  background: linear-gradient(to bottom, transparent, #E2E1DC);
+  height: 20%;
+  background: linear-gradient(to bottom, transparent, #E6E4DD);
   pointer-events: none;
   z-index: 0;
 }
 
-/* Progress bar */
+/* Progress */
 .bar {
   position: fixed;
   bottom: 0; left: 0;
-  height: 2px;
+  height: 1.5px;
   background: #1A1A1A;
+  opacity: 0.12;
   width: 0%;
   z-index: 200;
-  opacity: 0.15;
 }
 
-/* Scene base */
-.scene {
-  position: absolute;
+/* Kinetic stage */
+.stage {
+  position: fixed;
   inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  opacity: 0;
   z-index: 1;
-  padding: 80px;
+}
+
+/* The text container */
+.kt {
+  text-align: center;
+  max-width: 860px;
+  padding: 0 60px;
+  position: relative;
+}
+
+/* Individual text beats */
+.beat {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   text-align: center;
 }
-.scene.active { opacity: 1; }
+.beat.in  { opacity: 1; }
+.beat.out { opacity: 0; transition-duration: 0.5s; }
 
-/* Word / text transitions */
-.word {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  display: block;
-}
-.word.show { opacity: 1; transform: translateY(0); }
-.word.hide { opacity: 0; transform: translateY(-10px); transition-duration: 0.6s; }
-
-/* ═══════════════════════════════
-   SCENE 1 — THE QUESTION
-═══════════════════════════════ */
-.s1-small {
-  font-size: 13px;
+/* SMALL EYEBROW */
+.ey {
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 5px;
+  letter-spacing: 6px;
   text-transform: uppercase;
-  color: #999;
-  margin-bottom: 40px;
+  color: #AAAAAA;
+  display: block;
+  margin-bottom: 20px;
 }
-.s1-main {
-  font-size: 72px;
-  font-weight: 700;
+
+/* MAIN SANS TEXT */
+.sans {
+  font-family: 'Inter', sans-serif;
+  font-size: 64px;
+  font-weight: 600;
   letter-spacing: -3px;
+  line-height: 1.08;
+  color: #1A1A1A;
+}
+.sans.light { font-weight: 300; color: #777; font-size: 52px; }
+.sans.xl { font-size: 80px; font-weight: 700; letter-spacing: -4px; }
+
+/* SERIF — brand moments */
+.serif {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 80px;
+  font-weight: 400;
+  letter-spacing: -2px;
   line-height: 1.05;
   color: #1A1A1A;
-  max-width: 900px;
 }
-.s1-main .q { color: #888; }
+.serif.it { font-style: italic; }
+.serif.xl { font-size: 100px; letter-spacing: -4px; }
 
-/* ═══════════════════════════════
-   SCENE 2 — THE STAT
-═══════════════════════════════ */
-.s2-num {
-  font-size: 140px;
+/* BLUR SWEEP — for brand reveal */
+.blur-sweep {
+  animation: blurSweep 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+@keyframes blurSweep {
+  0%   { filter: blur(12px); opacity: 0; transform: translate(-50%,-50%) translateX(20px); }
+  100% { filter: blur(0px);  opacity: 1; transform: translate(-50%,-50%) translateX(0); }
+}
+
+/* STAT */
+.stat-num {
+  font-family: 'Inter', sans-serif;
+  font-size: 130px;
   font-weight: 800;
   letter-spacing: -8px;
   line-height: 1;
   color: #1A1A1A;
 }
-.s2-of {
-  font-size: 28px;
-  font-weight: 400;
-  color: #888;
-  margin-top: 16px;
-  letter-spacing: -0.5px;
-}
-.s2-of b { color: #1A1A1A; font-weight: 600; }
-
-/* ═══════════════════════════════
-   SCENE 3 — THE SOLUTION
-═══════════════════════════════ */
-.s3-eyebrow {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: #999;
-  margin-bottom: 36px;
-}
-.s3-h {
-  font-size: 78px;
-  font-weight: 700;
-  letter-spacing: -4px;
-  line-height: 1.05;
-  color: #1A1A1A;
-}
-.s3-h .acc { font-style: italic; font-weight: 700; color: #1A1A1A; }
-.s3-sub {
+.stat-label {
   font-size: 18px;
   font-weight: 400;
-  color: #888;
-  margin-top: 28px;
+  color: #AAAAAA;
   letter-spacing: 0;
-  max-width: 520px;
+  margin-top: 12px;
+  display: block;
 }
 
-/* ═══════════════════════════════
-   SCENE 4 — HOW IT WORKS (3 STEPS)
-═══════════════════════════════ */
-.s4-eye {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 6px;
+/* COUNTER */
+.counter {
+  font-family: 'Inter', sans-serif;
+  font-size: 130px;
+  font-weight: 800;
+  letter-spacing: -8px;
+  line-height: 1;
+  color: #1A1A1A;
+}
+.counter-sub {
+  font-size: 16px;
+  font-weight: 400;
+  color: #BBBBBB;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: #999;
-  margin-bottom: 56px;
+  margin-top: 14px;
+  display: block;
 }
-.steps {
+
+/* STEP CARDS */
+.cards {
   display: flex;
-  gap: 0;
-  width: 100%;
-  max-width: 900px;
-  border-top: 1px solid #E0DFDA;
+  gap: 1px;
+  background: #D8D6D0;
+  margin-top: 4px;
 }
-.step {
+.card {
   flex: 1;
-  padding: 32px 32px 32px 0;
-  border-right: 1px solid #E0DFDA;
+  background: #F5F4EE;
+  padding: 28px 24px;
   text-align: left;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s, transform 0.7s;
+  transform: translateY(16px);
+  transition: opacity 0.6s, transform 0.6s;
 }
-.step:last-child { border-right: none; padding-right: 0; padding-left: 32px; }
-.step:first-child { padding-left: 0; }
-.step.show { opacity: 1; transform: translateY(0); }
-.step-n {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 4px;
-  color: #CCC;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-}
-.step-t {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  color: #1A1A1A;
-  margin-bottom: 10px;
-  line-height: 1.2;
-}
-.step-b {
-  font-size: 15px;
-  font-weight: 400;
-  color: #888;
-  line-height: 1.6;
-}
+.card.in { opacity: 1; transform: translateY(0); }
+.card-n { font-size: 11px; font-weight: 500; letter-spacing: 4px; color: #CCCCCC; text-transform: uppercase; margin-bottom: 14px; }
+.card-t { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; color: #1A1A1A; margin-bottom: 8px; line-height: 1.2; }
+.card-b { font-size: 14px; font-weight: 400; color: #999; line-height: 1.6; }
 
-/* ═══════════════════════════════
-   SCENE 5 — WHAT WE BUILD
-═══════════════════════════════ */
-.s5-eye {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: #999;
-  margin-bottom: 48px;
-}
+/* DIVISION CARDS */
 .divs {
   display: flex;
   gap: 1px;
-  width: 100%;
-  max-width: 960px;
-  background: #E0DFDA;
+  background: #D8D6D0;
 }
-.div-card {
+.dcard {
   flex: 1;
-  background: #F7F6F1;
-  padding: 28px 24px 28px;
+  background: #F5F4EE;
+  padding: 26px 20px;
   text-align: left;
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(14px);
   transition: opacity 0.5s, transform 0.5s;
 }
-.div-card.show { opacity: 1; transform: translateY(0); }
-.div-icon {
-  width: 36px;
-  height: 36px;
-  margin-bottom: 20px;
-  opacity: 0.7;
-}
-.div-name {
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  color: #1A1A1A;
-  margin-bottom: 8px;
-}
-.div-agents {
-  font-size: 13px;
-  font-weight: 400;
-  color: #AAA;
-  letter-spacing: 0.5px;
-}
+.dcard.in { opacity: 1; transform: translateY(0); }
+.dcard svg { margin-bottom: 18px; opacity: 0.5; }
+.dcard-n { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; color: #1A1A1A; margin-bottom: 6px; }
+.dcard-a { font-size: 13px; font-weight: 400; color: #AAAAAA; }
 
-/* ═══════════════════════════════
-   SCENE 6 — THE RESULT
-═══════════════════════════════ */
-.s6-label {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: #999;
-  margin-bottom: 40px;
-}
-.s6-big {
-  font-size: 120px;
-  font-weight: 800;
-  letter-spacing: -7px;
-  line-height: 1;
-  color: #1A1A1A;
-}
-.s6-sub {
-  font-size: 20px;
-  font-weight: 400;
-  color: #888;
-  margin-top: 18px;
-}
-.s6-line {
-  font-size: 14px;
-  font-weight: 500;
-  color: #BBBBBB;
-  margin-top: 12px;
-  letter-spacing: 0.5px;
-  font-style: italic;
-}
-
-/* ═══════════════════════════════
-   SCENE 7 — CHAT DEMO
-═══════════════════════════════ */
-.s7-label {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: #999;
-  margin-bottom: 40px;
-}
-.s7-h {
-  font-size: 52px;
-  font-weight: 700;
-  letter-spacing: -2.5px;
-  margin-bottom: 40px;
-  color: #1A1A1A;
-}
-.s7-h em { font-style: italic; }
-.chatcard {
+/* CHAT */
+.chat {
   background: #fff;
-  border: 1px solid #E8E7E2;
-  border-radius: 20px;
-  padding: 28px 32px;
-  max-width: 600px;
+  border: 1px solid #E4E2DC;
+  border-radius: 18px;
+  padding: 26px 30px;
+  max-width: 580px;
   width: 100%;
-  box-shadow: 0 2px 40px rgba(0,0,0,0.06), 0 0 0 0.5px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 30px rgba(0,0,0,0.07);
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s 0.4s, transform 0.7s 0.4s;
 }
-.clabel {
-  font-size: 11px;
+.chat.in { opacity: 1; transform: translateY(0); }
+.chat-lbl {
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: #CCC;
-  margin-bottom: 20px;
+  color: #CCCCCC;
+  margin-bottom: 18px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
 }
-.clabel::before {
-  content: '';
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: #1A1A1A;
-  animation: blink 2s infinite;
-}
-@keyframes blink {
-  0%,100%{opacity:1;} 50%{opacity:0.2;}
-}
+.chat-lbl::before { content:''; width:5px; height:5px; border-radius:50%; background:#1A1A1A; animation: bl 2s infinite; }
+@keyframes bl { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
 .bub {
-  border-radius: 12px;
-  padding: 12px 16px;
+  border-radius: 11px;
+  padding: 11px 15px;
   margin-bottom: 8px;
   max-width: 82%;
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 15px;
   line-height: 1.55;
-  color: #1A1A1A;
   opacity: 0;
   transition: opacity 0.5s;
 }
-.bub.u {
-  background: #1A1A1A;
-  color: #fff;
-  margin-left: auto;
-  font-weight: 500;
-}
-.bub.r {
-  background: #F2F1EC;
-  color: #555;
-}
+.bub.u { background: #1A1A1A; color: #fff; font-weight: 500; margin-left: auto; }
+.bub.r { background: #F2F1EC; color: #555; }
 .bub.r b { color: #1A1A1A; font-weight: 600; }
 
-/* ═══════════════════════════════
-   SCENE 8 — CLOSE
-═══════════════════════════════ */
-.cl-pre {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  color: #999;
-  margin-bottom: 32px;
-}
-.cl-logo {
-  font-size: 84px;
-  font-weight: 800;
-  letter-spacing: -5px;
+/* CLOSE */
+.close-block { text-align: center; }
+.close-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 90px;
+  font-weight: 400;
+  letter-spacing: -4px;
   color: #1A1A1A;
   line-height: 1;
+  display: block;
 }
-.cl-url {
-  font-size: 16px;
+.close-url {
+  font-size: 14px;
   font-weight: 400;
-  color: #AAA;
-  letter-spacing: 5px;
+  letter-spacing: 6px;
   text-transform: uppercase;
-  margin-top: 20px;
+  color: #AAAAAA;
+  margin-top: 18px;
+  display: block;
 }
-.cl-cta {
-  margin-top: 44px;
+.close-cta {
+  display: inline-block;
+  margin-top: 40px;
   border: 1.5px solid #1A1A1A;
   color: #1A1A1A;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  padding: 16px 48px;
+  padding: 15px 48px;
   border-radius: 100px;
-  display: inline-block;
+  transition: background 0.2s;
   cursor: pointer;
 }
 
-/* transitions for scene entrance */
-#s1 .s1-small { transition-delay: 0.1s; }
-#s1 .s1-main  { transition-delay: 0.35s; }
-#s2 .s2-num   { transition-delay: 0.2s; }
-#s2 .s2-of    { transition-delay: 0.6s; }
-#s3 .s3-eyebrow { transition-delay: 0.1s; }
-#s3 .s3-h     { transition-delay: 0.3s; }
-#s3 .s3-sub   { transition-delay: 0.75s; }
-#s6 .s6-label { transition-delay: 0.1s; }
-#s6 .s6-big   { transition-delay: 0.3s; }
-#s6 .s6-sub   { transition-delay: 0.7s; }
-#s6 .s6-line  { transition-delay: 1.0s; }
-#s7 .s7-label { transition-delay: 0.1s; }
-#s7 .s7-h     { transition-delay: 0.3s; }
-#s7 .chatcard { transition-delay: 0.65s; }
-#s8 .cl-pre   { transition-delay: 0.1s; }
-#s8 .cl-logo  { transition-delay: 0.3s; }
-#s8 .cl-url   { transition-delay: 0.7s; }
-#s8 .cl-cta   { transition-delay: 1.1s; }
-
-.scene .word, .scene .s1-small, .scene .s1-main, .scene .s2-num,
-.scene .s2-of, .scene .s3-eyebrow, .scene .s3-h, .scene .s3-sub,
-.scene .s6-label, .scene .s6-big, .scene .s6-sub, .scene .s6-line,
-.scene .s7-label, .scene .s7-h, .scene .chatcard, .scene .cl-pre,
-.scene .cl-logo, .scene .cl-url, .scene .cl-cta, .scene .s4-eye, .scene .s5-eye {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.9s cubic-bezier(0.25,0.46,0.45,0.94),
-              transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94);
-}
-.scene.active .word, .scene.active .s1-small, .scene.active .s1-main,
-.scene.active .s2-num, .scene.active .s2-of, .scene.active .s3-eyebrow,
-.scene.active .s3-h, .scene.active .s3-sub, .scene.active .s6-label,
-.scene.active .s6-big, .scene.active .s6-sub, .scene.active .s6-line,
-.scene.active .s7-label, .scene.active .s7-h, .scene.active .chatcard,
-.scene.active .cl-pre, .scene.active .cl-logo, .scene.active .cl-url,
-.scene.active .cl-cta, .scene.active .s4-eye, .scene.active .s5-eye {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Replay */
 .rb {
   position: fixed;
-  bottom: 22px; right: 22px;
-  border: 1.5px solid rgba(26,26,26,0.2);
-  color: #888;
-  background: rgba(247,246,241,0.8);
-  padding: 10px 24px;
+  bottom: 20px; right: 20px;
+  border: 1px solid rgba(26,26,26,0.15);
+  color: #AAAAAA;
+  background: rgba(245,244,238,0.85);
+  padding: 9px 20px;
   border-radius: 100px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -446,175 +294,159 @@ body::after {
 </head>
 <body>
 
-<!-- S1: THE QUESTION -->
-<div class="scene" id="s1">
-  <div class="s1-small" style="transition-delay:0.1s;">The Problem</div>
-  <div class="s1-main" style="transition-delay:0.4s;">
-    Most businesses<br>don't know <span class="q">where to start</span><br>with AI.
-  </div>
-</div>
-
-<!-- S2: THE STAT -->
-<div class="scene" id="s2">
-  <div class="s2-num" style="transition-delay:0.2s;">9 in 10</div>
-  <div class="s2-of" style="transition-delay:0.65s;">businesses are <b>not using AI</b> at all.</div>
-</div>
-
-<!-- S3: THE SOLUTION -->
-<div class="scene" id="s3">
-  <div class="s3-eyebrow" style="transition-delay:0.1s;">Devolution Lab</div>
-  <div class="s3-h" style="transition-delay:0.35s;">
-    We make AI<br><em>simple</em> to deploy.
-  </div>
-  <div class="s3-sub" style="transition-delay:0.85s;">
-    We build, deploy, and run your AI workforce.<br>No complexity. No guesswork. Just results.
-  </div>
-</div>
-
-<!-- S4: HOW IT WORKS -->
-<div class="scene" id="s4">
-  <div class="s4-eye" style="transition-delay:0.1s;">How It Works</div>
-  <div class="steps">
-    <div class="step" id="st1">
-      <div class="step-n">01</div>
-      <div class="step-t">We learn your business</div>
-      <div class="step-b">A 2-hour session. We map every workflow AI can own.</div>
-    </div>
-    <div class="step" id="st2">
-      <div class="step-n">02</div>
-      <div class="step-t">We build your workforce</div>
-      <div class="step-b">Custom AI agents for sales, ops, finance, marketing.</div>
-    </div>
-    <div class="step" id="st3">
-      <div class="step-n">03</div>
-      <div class="step-t">We run it for you</div>
-      <div class="step-b">Fully managed. Results in 30 days. Yours to keep.</div>
-    </div>
-  </div>
-</div>
-
-<!-- S5: WHAT WE BUILD -->
-<div class="scene" id="s5">
-  <div class="s5-eye" style="transition-delay:0.1s;">What We Automate</div>
-  <div class="divs">
-    <div class="div-card" id="dc1">
-      <svg class="div-icon" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      <div class="div-name">Sales</div>
-      <div class="div-agents">Lead gen · Pipeline · Renewals</div>
-    </div>
-    <div class="div-card" id="dc2">
-      <svg class="div-icon" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      <div class="div-name">Marketing</div>
-      <div class="div-agents">SEO · Content · Campaigns</div>
-    </div>
-    <div class="div-card" id="dc3">
-      <svg class="div-icon" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-      <div class="div-name">Operations</div>
-      <div class="div-agents">Dispatch · Vendors · SLA</div>
-    </div>
-    <div class="div-card" id="dc4">
-      <svg class="div-icon" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-      <div class="div-name">Finance</div>
-      <div class="div-agents">Invoicing · Budgets · Payroll</div>
-    </div>
-    <div class="div-card" id="dc5">
-      <svg class="div-icon" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-      <div class="div-name">Technology</div>
-      <div class="div-agents">Security · Infra · Help Desk</div>
-    </div>
-  </div>
-</div>
-
-<!-- S6: THE COUNTER -->
-<div class="scene" id="s6">
-  <div class="s6-label" style="transition-delay:0.1s;">The Opportunity</div>
-  <div class="s6-big" style="transition-delay:0.35s;" id="ctr">$0</div>
-  <div class="s6-sub" style="transition-delay:0.8s;">in annual savings unlocked per enterprise</div>
-  <div class="s6-line" style="transition-delay:1.1s;">That's the cost of not starting.</div>
-</div>
-
-<!-- S7: CHAT DEMO -->
-<div class="scene" id="s7">
-  <div class="s7-label" style="transition-delay:0.1s;">In Practice</div>
-  <div class="s7-h" style="transition-delay:0.3s;">You run it all<br>with a <em>message.</em></div>
-  <div class="chatcard" style="transition-delay:0.7s;">
-    <div class="clabel">Your AI Workforce</div>
-    <div class="bub u" id="q1" style="opacity:0;">What needs my attention today?</div>
-    <div class="bub r" id="a1" style="opacity:0;"><b>3 items.</b> Vendor missed SLA — escalated. <b>47 new leads</b>, 12 qualified. Q2 is <b>14% above plan.</b></div>
-    <div class="bub u" id="q2" style="opacity:0;">Close out the invoices and send the board summary.</div>
-    <div class="bub r" id="a2" style="opacity:0;"><b>Done.</b> $2.3M in invoices processed. Board summary sent. All green.</div>
-  </div>
-</div>
-
-<!-- S8: CLOSE -->
-<div class="scene" id="s8">
-  <div class="cl-pre" style="transition-delay:0.1s;">Get Started</div>
-  <div class="cl-logo" style="transition-delay:0.3s;">Devolution Lab</div>
-  <div class="cl-url" style="transition-delay:0.75s;">devolutionlab.com</div>
-  <div class="cl-cta" style="transition-delay:1.1s;">Start Your AI Journey</div>
+<div class="stage">
+  <div class="kt" id="stage"></div>
 </div>
 
 <div class="bar" id="bar"></div>
 <button class="rb" id="rb" onclick="go()">&#8635; Replay</button>
 
 <script>
-var MS=8000, IDS=['s1','s2','s3','s4','s5','s6','s7','s8'], cur=0, tmr=null, t0=null;
+// ── BEAT SEQUENCE ──────────────────────────────────────────────────────────
+// Each beat: { html, hold (ms), transition }
+var BEATS = [
 
-function animSteps(){
-  ['st1','st2','st3'].forEach(function(id,i){
-    setTimeout(function(){var e=document.getElementById(id);if(e)e.classList.add('show');},500+i*220);
-  });
+  // 1. Opening question — word by word feel via sequential lines
+  { hold: 1000, html: '<span class="ey">The Problem</span>' },
+  { hold: 2200, html: '<span class="sans">Most businesses</span>' },
+  { hold: 2200, html: '<span class="sans">don\'t know</span>' },
+  { hold: 2400, html: '<span class="sans xl">where to start<br><span style="color:#AAAAAA;font-weight:300;">with AI.</span></span>' },
+
+  // 2. The reality stat
+  { hold: 500,  html: '' },
+  { hold: 2000, html: '<span class="ey">The Reality</span>' },
+  { hold: 2800, html: '<span class="stat-num">9 in 10</span><span class="stat-label">businesses are not using AI at all.</span>' },
+
+  // 3. The gap
+  { hold: 500,  html: '' },
+  { hold: 2600, html: '<span class="sans light">That gap is<br>costing them <em style="font-style:normal;color:#1A1A1A;font-weight:600;">everything.</em></span>' },
+
+  // 4. The solution — serif brand moment
+  { hold: 500,  html: '' },
+  { hold: 1200, html: '<span class="ey">The Solution</span>' },
+  { hold: 2800, html: '<span class="sans">We make AI</span>' },
+  { hold: 2800, html: '<span class="sans">simple to deploy.</span>' },
+  { hold: 3200, html: '<span class="serif it xl">Devolution Lab.</span>' },
+
+  // 5. The promise
+  { hold: 500,  html: '' },
+  { hold: 2400, html: '<span class="sans light">No complexity.<br>No guesswork.</span>' },
+  { hold: 2600, html: '<span class="sans">We build it.<br>We run it for you.</span>' },
+
+  // 6. How it works — card reveal
+  { hold: 500,  html: '' },
+  { hold: 800,  html: '<span class="ey" style="display:block;margin-bottom:36px;">How It Works</span><div class="cards"><div class="card" id="c1"><div class="card-n">01</div><div class="card-t">We learn your business</div><div class="card-b">A 2-hour session. We map every workflow AI can own.</div></div><div class="card" id="c2"><div class="card-n">02</div><div class="card-t">We build your workforce</div><div class="card-b">Custom AI agents for every function in your company.</div></div><div class="card" id="c3"><div class="card-n">03</div><div class="card-t">We run it for you</div><div class="card-b">Fully managed. Results in 30 days. Yours to keep.</div></div></div>', onIn: animCards },
+
+  // 7. What we automate — divisions
+  { hold: 500,  html: '' },
+  { hold: 800,  html: '<span class="ey" style="display:block;margin-bottom:28px;">What We Automate</span><div class="divs"><div class="dcard" id="d1"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><div class="dcard-n">Sales</div><div class="dcard-a">Lead gen · Pipeline · Renewals</div></div><div class="dcard" id="d2"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><div class="dcard-n">Marketing</div><div class="dcard-a">SEO · Content · Social</div></div><div class="dcard" id="d3"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg><div class="dcard-n">Operations</div><div class="dcard-a">Dispatch · Vendors · SLA</div></div><div class="dcard" id="d4"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><div class="dcard-n">Finance</div><div class="dcard-a">Invoicing · Budgets · Payroll</div></div><div class="dcard" id="d5"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><div class="dcard-n">Technology</div><div class="dcard-a">Security · Infra · Help Desk</div></div></div>', onIn: animDivs },
+
+  // 8. Proof — chat
+  { hold: 500,  html: '' },
+  { hold: 800,  html: '<span class="ey" style="display:block;margin-bottom:24px;">In Practice</span><span class="sans" style="font-size:44px;display:block;margin-bottom:32px;">You run it all with a message.</span><div class="chat in" id="chatbox"><div class="chat-lbl">Your AI Workforce</div><div class="bub u" id="q1" style="opacity:0;">What needs my attention today?</div><div class="bub r" id="a1" style="opacity:0;"><b>3 items.</b> Vendor missed SLA. <b>47 new leads</b>, 12 qualified. Q2 <b>14% above plan.</b></div><div class="bub u" id="q2" style="opacity:0;">Send the board summary.</div><div class="bub r" id="a2" style="opacity:0;"><b>Done.</b> Sent. Revenue, pipeline, compliance — all green.</div></div>', onIn: animChat },
+
+  // 9. $100B counter
+  { hold: 500,  html: '' },
+  { hold: 500,  html: '<span class="ey">The Opportunity</span>' },
+  { hold: 800,  html: '<span class="counter" id="ctr">$0</span><span class="counter-sub">In annual savings at full scale</span>', onIn: animCounter },
+  { hold: 5000, html: '<span class="counter">$100B+</span><span class="counter-sub" style="color:#888;transition:opacity 0.5s 0.5s;">That\'s the cost of not starting.</span>' },
+
+  // 10. Close
+  { hold: 600,  html: '' },
+  { hold: 400,  html: '<span class="ey" style="display:block;margin-bottom:28px;">Get Started</span>', onIn: function(){ setTimeout(function(){showClose();},400); } },
+
+];
+
+var beatIdx = 0, beatTmr = null, curBeat = null;
+
+function clearBeat() {
+  if (curBeat) { curBeat.classList.add('out'); setTimeout(function(){ if(curBeat)curBeat.remove(); curBeat=null; }, 600); }
 }
 
-function animDivs(){
-  ['dc1','dc2','dc3','dc4','dc5'].forEach(function(id,i){
-    setTimeout(function(){var e=document.getElementById(id);if(e)e.classList.add('show');},400+i*160);
-  });
+function showBeat(idx) {
+  var stage = document.getElementById('stage');
+  clearBeat();
+  var b = BEATS[idx];
+  if (!b) return;
+  if (!b.html) { beatIdx=idx; return; }
+  setTimeout(function(){
+    var el = document.createElement('div');
+    el.className = 'beat';
+    el.innerHTML = b.html;
+    stage.appendChild(el);
+    void el.offsetWidth;
+    el.classList.add('in');
+    if (b.html.includes('blur-sweep')) el.classList.add('blur-sweep');
+    curBeat = el;
+    if (b.onIn) setTimeout(b.onIn, 200);
+  }, 100);
 }
 
-function animCounter(){
-  var target=100000000000, dur=5500, start=performance.now();
+function animCards() {
+  ['c1','c2','c3'].forEach(function(id,i){
+    setTimeout(function(){var e=document.getElementById(id);if(e)e.classList.add('in');},300+i*200);
+  });
+}
+function animDivs() {
+  ['d1','d2','d3','d4','d5'].forEach(function(id,i){
+    setTimeout(function(){var e=document.getElementById(id);if(e)e.classList.add('in');},200+i*140);
+  });
+}
+function animChat() {
+  ['q1','a1','q2','a2'].forEach(function(id,i){
+    setTimeout(function(){var e=document.getElementById(id);if(e)e.style.opacity='1';},300+i*1200);
+  });
+}
+function animCounter() {
+  var target=100000000000,dur=5500,start=performance.now();
   function tick(ts){
-    var p=Math.min((ts-start)/dur,1);
-    var e=1-Math.pow(1-p,4);
-    var v=Math.floor(e*target);
+    var p=Math.min((ts-start)/dur,1),e=1-Math.pow(1-p,4),v=Math.floor(e*target);
     var t=v>=1e11?'$100B+':v>=1e9?'$'+(v/1e9).toFixed(0)+'B':v>=1e6?'$'+(v/1e6).toFixed(0)+'M':'$'+(v/1e3).toFixed(0)+'K';
-    document.getElementById('ctr').textContent=t;
+    var el=document.getElementById('ctr');if(el)el.textContent=t;
     if(p<1)requestAnimationFrame(tick);
   }
-  setTimeout(function(){requestAnimationFrame(tick);},400);
+  requestAnimationFrame(tick);
+}
+function showClose() {
+  var stage = document.getElementById('stage');
+  clearBeat();
+  setTimeout(function(){
+    var el = document.createElement('div');
+    el.className = 'beat';
+    el.innerHTML = '<div class="close-block"><span class="close-brand">Devolution Lab</span><span class="close-url">devolutionlab.com</span><div class="close-cta">Start Your AI Journey</div></div>';
+    stage.appendChild(el);
+    void el.offsetWidth;
+    el.classList.add('in');
+    curBeat = el;
+    document.getElementById('rb').classList.add('vis');
+  }, 200);
 }
 
-function animChat(){
-  ['q1','a1','q2','a2'].forEach(function(id,i){
-    setTimeout(function(){var e=document.getElementById(id);if(e)e.style.opacity='1';},800+i*1300);
-  });
+function runBeat() {
+  if (beatIdx >= BEATS.length) {
+    clearInterval(beatTmr); beatTmr = null;
+    document.getElementById('rb').classList.add('vis');
+    return;
+  }
+  var b = BEATS[beatIdx];
+  showBeat(beatIdx);
+  var hold = b.hold || 2000;
+  beatIdx++;
+  beatTmr = setTimeout(runBeat, hold);
 }
 
-function show(idx){
-  IDS.forEach(function(id,i){document.getElementById(id).classList.toggle('active',i===idx);});
-  if(idx===3)animSteps();
-  if(idx===4)animDivs();
-  if(idx===5)animCounter();
-  if(idx===6)animChat();
-}
-
-function reset(){
-  document.querySelectorAll('.bub').forEach(function(n){n.style.opacity='0';n.style.transition='none';});
-  document.querySelectorAll('.step,.div-card').forEach(function(n){n.classList.remove('show');});
-  document.getElementById('ctr').textContent='$0';
-}
-
-function go(){
-  clearInterval(tmr);cur=0;t0=Date.now();
+function go() {
+  clearTimeout(beatTmr); beatTmr = null; beatIdx = 0;
+  clearBeat();
   document.getElementById('rb').classList.remove('vis');
-  document.getElementById('bar').style.width='0%';
-  reset();show(0);
-  tmr=setInterval(function(){cur++;if(cur>=IDS.length){clearInterval(tmr);document.getElementById('rb').classList.add('vis');return;}show(cur);},MS);
-  var b=document.getElementById('bar'),tot=MS*IDS.length;
-  (function upd(){var p=Math.min(((Date.now()-t0)/tot)*100,100);b.style.width=p+'%';if(p<100)requestAnimationFrame(upd);})();
+  document.getElementById('bar').style.width = '0%';
+  var t0 = Date.now();
+  var total = BEATS.reduce(function(a,b){return a+(b.hold||2000);},0) + 3000;
+  (function upd(){var p=Math.min(((Date.now()-t0)/total)*100,100);document.getElementById('bar').style.width=p+'%';if(p<100)requestAnimationFrame(upd);})();
+  setTimeout(runBeat, 600);
 }
-window.addEventListener('load',function(){setTimeout(go,700);});
+
+window.addEventListener('load', function(){ setTimeout(go, 700); });
 </script>
 </body>
 </html>
